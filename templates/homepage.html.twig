@@ -2,6 +2,22 @@
 
 {% block body %}
     <div class="jumbotron">
-        <h1 class="display-4">Hello World!</h1>
+        <h1 class="display-4">Grooming Chimps</h1>
+        <p class="lead">Code analyses for PHP projects.</p>
+        <hr />
+        {% for repo in app.flashes('success') %}
+            <div class="alert">In progress... Analysing repo <strong>{{ repo }}</strong>!</div>
+        {% else %}
+            {{ form_start(form) }}
+            {{ form_row(form.repo) }}
+            {{ form_row(form.branch) }}
+
+            <hr />
+            {{ form_row(form.name) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.token) }}
+
+            {{ form_end(form) }}
+        {% endfor %}
     </div>
 {% endblock %}
