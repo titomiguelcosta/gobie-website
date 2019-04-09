@@ -6,7 +6,7 @@
         <p class="lead">Code analyses for PHP projects.</p>
         <hr />
         {% for repo in app.flashes('success') %}
-            <div class="alert">In progress... Analysing repo <strong>{{ repo }}</strong>!</div>
+            <div class="alert">In progress... Analysing repo <strong>{{ repo }}</strong>! Expect an e-mail soon.</div>
         {% else %}
             {{ form_start(form) }}
             {{ form_row(form.repo) }}
