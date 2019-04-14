@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\DBAL\Types\DateTimeImmutableType;
 use DateTimeImmutable;
 
 /**
@@ -23,6 +22,11 @@ class JobSubmit
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,6 +52,12 @@ class JobSubmit
     private $token;
 
     /**
+     * @ORM\Column(type="json")
+     * @Assert\Count(min=1, minMessage="Pick at least one task")
+     */
+    private $tasks;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -57,24 +67,36 @@ class JobSubmit
         $this->setCreatedAt(new DateTimeImmutable());
     }
 
-    public function getId(): ? int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ? string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(? string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getRepo(): ? string
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getRepo(): ?string
     {
         return $this->repo;
     }
@@ -86,7 +108,7 @@ class JobSubmit
         return $this;
     }
 
-    public function getBranch(): ? string
+    public function getBranch(): ?string
     {
         return $this->branch;
     }
@@ -98,31 +120,31 @@ class JobSubmit
         return $this;
     }
 
-    public function getUsername(): ? string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername(? string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getToken(): ? string
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
-    public function setToken(? string $token): self
+    public function setToken(?string $token): self
     {
         $this->token = $token;
 
         return $this;
     }
 
-    public function getCreatedAt(): ? \DateTimeInterface
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -132,5 +154,22 @@ class JobSubmit
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getTasks(): ?array
+    {
+        return $this->tasks;
+    }
+
+    public function setTasks(array $tasks): self
+    {
+        $this->tasks = $tasks;
+
+        return $this;
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->username && $this->token;
     }
 }
