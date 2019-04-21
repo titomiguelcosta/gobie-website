@@ -26,7 +26,6 @@ class HomepageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            die(print_r($client->getAuth(), true));
             /** @var $jobSubmit JobSubmit */
             $jobSubmit = $form->getData();
             if (!$jobSubmit->getEmail() && $security->getUser() instanceof User) {

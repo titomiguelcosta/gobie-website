@@ -18,21 +18,6 @@ class Client
         $this->security = $security;
     }
 
-
-    public function getAuth(): array
-    {
-        $response = $this->httpClient->request(
-            Request::METHOD_GET,
-            sprintf('/auth'),
-            [
-                'headers' => $this->getHeaders(),
-                'auth_bearer' => $this->getAuthBearer(),
-            ]
-        );
-
-        return $response->toArray();
-    }
-
     public function getUser(string $username): array
     {
         $response = $this->httpClient->request(
