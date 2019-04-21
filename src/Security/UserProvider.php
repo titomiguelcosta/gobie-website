@@ -33,17 +33,18 @@ class UserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         try {
-            $user = $this->client->getUser($username);
+            $data = $this->client->getUser($username);
         } catch (ClientException $exception) {
             throw new UsernameNotFoundException();
         }
 
-        $entity = new User();
-        $entity->setEmail($user['email']);
-        $entity->setUsername($user['username']);
-        $entity->setPassword($user['password']);
+        $user = new User();
+        $user->setEmail($data['email']);
+        $user->setUsername($data['username']);
+        $user->setPassword($data['password']);
+        $user->setId($data['id']);
 
-        return $entity;
+        return $user;
     }
 
     /**

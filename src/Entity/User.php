@@ -6,6 +6,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
+    private $id;
+
     private $username;
 
     private $email;
@@ -13,6 +15,18 @@ class User implements UserInterface
     private $password;
 
     private $token;
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * @return (Role|string)[] The user roles
