@@ -25,6 +25,7 @@ class Client
             sprintf('/users/%s', $username),
             [
                 'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
             ]
         );
 
@@ -57,6 +58,7 @@ class Client
             '/jobs',
             [
                 'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
             ]
         );
 
@@ -76,6 +78,7 @@ class Client
                     'isPrivate' => $isPrivate,
                     'createdBy' => $user instanceof User ? $user->getId() : null,
                 ],
+                'auth_bearer' => $this->getAuthBearer(),
             ]
         );
 
@@ -93,6 +96,7 @@ class Client
                     'project' => $project,
                     'branch' => $branch,
                 ],
+                'auth_bearer' => $this->getAuthBearer(),
             ]
         );
 
@@ -112,6 +116,7 @@ class Client
                         'job' => $job,
                         'tool' => $task,
                     ],
+                    'auth_bearer' => $this->getAuthBearer(),
                 ]
             );
 
@@ -128,10 +133,13 @@ class Client
             'content-type' => 'application/ld+json',
         ];
 
-        if ($this->security->getUser() instanceof User) {
-            $headers['authorization'] = 'Bearer '.$this->security->getUser()->getToken();
-        }
-
         return $headers;
+    }
+
+    private function getAuthBearer(): ?string
+    {
+        $user = $this->security->getUser();
+
+        return $user instanceof User ? $user->getToken() : null;
     }
 }
