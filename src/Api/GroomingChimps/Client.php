@@ -4,14 +4,50 @@ namespace App\Api\GroomingChimps;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use App\Entity\User;
 
 class Client
 {
     private $httpClient;
+    private $security;
 
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(HttpClientInterface $httpClient, Security $security)
     {
         $this->httpClient = $httpClient;
+        $this->security = $security;
+    }
+
+    public function getUser(string $username): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_GET,
+            sprintf('/users/%s', $username),
+            [
+                'headers' => $this->getHeaders(),
+            ]
+        );
+
+        return $response->toArray();
+    }
+
+    public function getToken(string $username, string $password): ?string
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_POST,
+            '/login_check',
+            [
+                'headers' => $this->getHeaders(),
+                'json' => [
+                    'username' => $username,
+                    'password' => $password,
+                ],
+            ]
+        );
+
+        $data = $response->toArray();
+
+        return $data['token'] ?? null;
     }
 
     public function getJobs(): string
@@ -20,9 +56,7 @@ class Client
             Request::METHOD_GET,
             '/jobs',
             [
-                'headers' => [
-                    "accept" => "application/ld+json"
-                ],
+                'headers' => $this->getHeaders(),
             ]
         );
 
@@ -39,7 +73,7 @@ class Client
                 'json' => [
                     'repo' => $repo,
                     'isPrivate' => $isPrivate,
-                ]
+                ],
             ]
         );
 
@@ -56,7 +90,7 @@ class Client
                 'json' => [
                     'project' => $project,
                     'branch' => $branch,
-                ]
+                ],
             ]
         );
 
@@ -75,7 +109,7 @@ class Client
                     'json' => [
                         'job' => $job,
                         'tool' => $task,
-                    ]
+                    ],
                 ]
             );
 
@@ -88,10 +122,14 @@ class Client
     private function getHeaders(): array
     {
         $headers = [
-            "accept" => "application/ld+json",
-            "content-type" => "application/ld+json",
+            'accept' => 'application/ld+json',
+            'content-type' => 'application/ld+json',
         ];
 
-        return array_merge($this->httpClient::OPTIONS_DEFAULTS['headers'], $headers);
+        if ($this->security->getUser() instanceof User) {
+            $headers['authorization'] = 'Bearer '.$this->security->getUser()->getToken();
+        }
+
+        return $headers;
     }
 }

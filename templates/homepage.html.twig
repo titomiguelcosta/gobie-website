@@ -1,22 +1,53 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    <h1 class="display-4">Grooming Chimps</h1>    
+    <div class="clearfix">
+        <p class="lead float-left">Code analyses for PHP projects</p>
+
+        <div class="menu float-right">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <span>Hi {{ app.user.username }}! <a href="{{ url('app_logout') }}">Logout</a></span>
+        {% else %}
+            <span><a href="{{ url("app_login") }}">Login</a></span>
+        {% endif %}
+        </div>
+    </div>
     <div class="jumbotron">
-        <h1 class="display-4">Grooming Chimps</h1>
-        <p class="lead">Code analyses for PHP projects.</p>
-        <hr />
-        {% for repo in app.flashes('success') %}
-            <div class="alert">In progress... Analysing repo <strong>{{ repo }}</strong>! Expect an e-mail soon.</div>
+        {% for repo in app.flashes('repo') %}
+            <div class="alert">
+                <strong>Job submitted...</strong> 
+                <p>Analysing repo <strong>{{ repo }}</strong>! {% if app.flashes('email') | length > 0 %}Expect an e-mail soon.{% endif %}</p>
+            </div>
         {% else %}
             {{ form_start(form) }}
+
             {{ form_row(form.repo) }}
             {{ form_row(form.branch) }}
 
-            <hr />
-            {{ form_row(form.name) }}
-            {{ form_row(form.username) }}
-            {{ form_row(form.token) }}
+            <hr>
 
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseAuthentication" role="button" aria-expanded="false" aria-controls="collapseAuthentication">Repo Auth</a>
+            <hr>
+            <fieldset class="collapse" id="collapseAuthentication">
+                {{ form_row(form.username) }}
+                {{ form_row(form.token) }}
+            </fieldset>
+            
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseDetails" role="button" aria-expanded="false" aria-controls="collapseDetails">Details</a>
+            <hr>
+            <fieldset class="collapse" id="collapseDetails">
+                <legend>Details</legend>
+                {{ form_row(form.name, {'label': 'Codename'}) }}
+                {% if form["email"] is defined %}
+                    {{ form_row(form.email, {'label': 'E-mail', 'help': 'If you would like to be notified when analyse is complete'}) }}
+                {% endif %}
+            </fieldset>
+
+            <fieldset>
+                <legend>Tasks</legend>
+                {{ form_row(form.tasks, {'label': false}) }}
+            </fieldset>
             {{ form_end(form) }}
         {% endfor %}
     </div>

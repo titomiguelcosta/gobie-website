@@ -12,14 +12,27 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Core\Security;
+use App\Entity\User;
 
 class JobSubmitType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['required' => false])
-            ->add('email', EmailType::class, ['required' => false])
+            ->add('name', TextType::class, [
+                'required' => false,
+            ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+            ])
             ->add('repo', UrlType::class)
             ->add('branch', TextType::class)
             ->add('username', TextType::class, ['required' => false])
@@ -32,14 +45,18 @@ class JobSubmitType extends AbstractType
                         'Xliff' => 'lint:xliff',
                     ],
                     'Code' => [
-                        'Mess Detection' => 'phpmd'
-                    ]
+                        'Mess Detection' => 'phpmd',
+                    ],
                 ],
                 'multiple' => true,
                 'expanded' => true,
                 'required' => true,
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit Job']);
+
+        if ($this->security->getUser() instanceof User && $this->security->getUser()->getEmail()) {
+            $builder->remove('email');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
