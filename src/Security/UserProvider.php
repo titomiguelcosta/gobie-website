@@ -42,7 +42,7 @@ class UserProvider implements UserProviderInterface
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
-        $user->setId($data['id']);
+        $user->setId($data['@id']);
 
         return $user;
     }
