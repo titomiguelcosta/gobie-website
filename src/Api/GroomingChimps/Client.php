@@ -6,6 +6,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
+use App\Entity\Task;
 
 class Client
 {
@@ -106,6 +107,7 @@ class Client
     public function createTasks(string $job, array $tasks): array
     {
         $responses = [];
+        /** @var Task $task */
         foreach ($tasks as $task) {
             $response = $this->httpClient->request(
                 Request::METHOD_POST,
@@ -114,7 +116,8 @@ class Client
                     'headers' => $this->getHeaders(),
                     'json' => [
                         'job' => $job,
-                        'tool' => $task,
+                        'tool' => $task->getTool(),
+                        'command' => $task->getCommand(),
                     ],
                     'auth_bearer' => $this->getAuthBearer(),
                 ]

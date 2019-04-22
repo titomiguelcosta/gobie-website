@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
+use App\Entity\Task;
 
 class HomepageController extends AbstractController
 {

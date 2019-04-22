@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
+use Symfony\Component\Form\CallbackTransformer;
+use App\Entity\Task;
 
 class JobSubmitType extends AbstractType
 {
@@ -53,6 +55,23 @@ class JobSubmitType extends AbstractType
                 'required' => true,
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit Job']);
+
+        $builder
+            ->get('tasks')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tasksAsCollection) {
+                    // transform the array of objects to an array of string
+                    return is_array($tasksAsCollection) ? array_map(function ($task) {
+                        return [$task => new Task($task)];
+                    }, $tasksAsCollection) : [];
+                },
+                function ($tasksAsArray) {
+                    // transform the array of strings back to an array of objects
+                    return is_array($tasksAsArray) ? array_map(function ($task) {
+                        return new Task($task);
+                    }, $tasksAsArray) : [];
+                }
+            ));
 
         if ($this->security->getUser() instanceof User && $this->security->getUser()->getEmail()) {
             $builder->remove('email');
