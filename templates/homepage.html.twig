@@ -26,22 +26,11 @@
             {{ form_row(form.branch) }}
 
             <hr>
-
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseAuthentication" role="button" aria-expanded="false" aria-controls="collapseAuthentication">Repo Auth</a>
-            <hr>
-            <fieldset class="collapse" id="collapseAuthentication">
-                {{ form_row(form.username) }}
-                {{ form_row(form.token) }}
-            </fieldset>
             
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseDetails" role="button" aria-expanded="false" aria-controls="collapseDetails">Details</a>
             <hr>
             <fieldset class="collapse" id="collapseDetails">
-                <legend>Details</legend>
-                {{ form_row(form.name, {'label': 'Codename'}) }}
-                {% if form["email"] is defined %}
-                    {{ form_row(form.email, {'label': 'E-mail', 'help': 'If you would like to be notified when analyse is complete'}) }}
-                {% endif %}
+                {{ form_row(form.description, {'label': 'Description'}) }}
             </fieldset>
 
             <fieldset>

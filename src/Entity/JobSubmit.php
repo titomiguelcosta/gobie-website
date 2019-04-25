@@ -21,12 +21,7 @@ class JobSubmit
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $email;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,16 +35,6 @@ class JobSubmit
      * @Assert\NotBlank()
      */
     private $branch;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $token;
 
     /**
      * @ORM\Column(type="json")
@@ -72,26 +57,14 @@ class JobSubmit
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getDescription(): ?string
     {
-        return $this->name;
+        return $this->description;
     }
 
-    public function setName(?string $name): self
+    public function setDescription(?string $description): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
+        $this->description = $description;
 
         return $this;
     }
@@ -116,30 +89,6 @@ class JobSubmit
     public function setBranch(string $branch): self
     {
         $this->branch = $branch;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
 
         return $this;
     }
@@ -170,6 +119,6 @@ class JobSubmit
 
     public function isPrivate(): bool
     {
-        return $this->username && $this->token;
+        return false !== strpos($this->repo, ':');
     }
 }

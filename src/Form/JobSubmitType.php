@@ -29,16 +29,11 @@ class JobSubmitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'required' => false,
-            ])
-            ->add('email', EmailType::class, [
+            ->add('description', TextType::class, [
                 'required' => false,
             ])
             ->add('repo', UrlType::class)
             ->add('branch', TextType::class)
-            ->add('username', TextType::class, ['required' => false])
-            ->add('token', PasswordType::class, ['required' => false])
             ->add('tasks', ChoiceType::class, [
                 'choices' => [
                     'Linter' => [

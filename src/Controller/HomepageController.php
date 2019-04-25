@@ -9,12 +9,13 @@ use App\Entity\JobSubmit;
 use Symfony\Component\HttpFoundation\Request;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\User;
-use App\Entity\Task;
 
 class HomepageController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="homepage")
      */
     public function __invoke(Request $request, Security $security, GroomingChimpsApiClient $client)
@@ -27,19 +28,19 @@ class HomepageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var $user User */
+            $user = $security->getUser();
             /** @var $jobSubmit JobSubmit */
             $jobSubmit = $form->getData();
-            if (!$jobSubmit->getEmail() && $security->getUser() instanceof User) {
-                $jobSubmit->setEmail($security->getUser()->getEmail());
+            if ($user->getEmail()) {
+                $jobSubmit->setEmail($user->getEmail());
+                $this->addFlash('email', $user->getEmail());
             }
             $project = $client->createProject($jobSubmit->getRepo(), $jobSubmit->isPrivate());
             $job = $client->createJob($project['@id'], $jobSubmit->getBranch());
             $client->createTasks($job['@id'], $jobSubmit->getTasks());
 
             $this->addFlash('repo', $jobSubmit->getRepo());
-            if ($jobSubmit->getEmail()) {
-                $this->addFlash('email', $jobSubmit->getEmail());
-            }
 
             return $this->redirectToRoute('homepage');
         }
