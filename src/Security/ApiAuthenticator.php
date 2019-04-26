@@ -78,6 +78,7 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
@@ -102,7 +103,7 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->encoder->isPasswordValid($user, $credentials['password']);
+        return $user instanceof User && $user->getToken();
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
