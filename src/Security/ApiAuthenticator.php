@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -28,6 +29,12 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
     private $client;
     private $encoder;
 
+    /**
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param CsrfTokenManagerInterface $csrfTokenManager
+     * @param UserPasswordEncoderInterface $encoder
+     * @param Client $client
+     */
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
@@ -40,12 +47,20 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
         $this->encoder = $encoder;
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     public function supports(Request $request)
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
+    /**
+     * @param Request $request
+     * @return array|mixed
+     */
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -68,19 +83,19 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        /** User $user */
-        $user = $userProvider->loadUserByUsername($credentials['username']);
-        if (!$user) {
-            throw new CustomUserMessageAuthenticationException('Username could not be found.');
-        }
-
         try {
-            $token = $this->client->getToken($credentials['username'], $credentials['password']);
+            $data = $this->client->auth($credentials['username'], $credentials['password']);
         } catch (ClientException $exception) {
             throw new CustomUserMessageAuthenticationException('Token invalid. Bad credentials.');
         }
 
-        $user->setToken($token);
+        /** @var User $user */
+        $user = new User();
+        $user->setId($data['id']);
+        $user->setRoles($data['roles']);
+        $user->setToken($data['token']);
+        $user->setEmail($data['email']);
+        $user->setUsername($data['username']);
 
         return $user;
     }

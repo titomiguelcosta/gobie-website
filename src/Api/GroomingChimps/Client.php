@@ -33,11 +33,11 @@ class Client
         return $response->toArray();
     }
 
-    public function getToken(string $username, string $password): ?string
+    public function auth(string $username, string $password): array
     {
         $response = $this->httpClient->request(
             Request::METHOD_POST,
-            '/login_check',
+            sprintf('/users/auth'),
             [
                 'headers' => $this->getHeaders(),
                 'json' => [
@@ -47,9 +47,7 @@ class Client
             ]
         );
 
-        $data = $response->toArray();
-
-        return $data['token'] ?? null;
+        return $response->toArray();
     }
 
     public function getJobs(): string
