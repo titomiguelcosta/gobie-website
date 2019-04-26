@@ -14,6 +14,8 @@ class User implements UserInterface
 
     private $password;
 
+    private $roles;
+
     private $token;
 
     public function getId(): string
@@ -33,7 +35,18 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     * @return User
+     */
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
