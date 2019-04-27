@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="jumbotron">
+        {% for repo in app.flashes('repo') %}
+            <div class="alert">
+                <strong>Job submitted...</strong> 
+                <p>Analysing repo <strong>{{ repo }}</strong>! {% if app.flashes('email') | length > 0 %}Expect an e-mail soon.{% endif %}</p>
+            </div>
+        {% else %}
+            {{ form_start(form) }}
+
+            {{ form_row(form.repo) }}
+            {{ form_row(form.branch) }}
+
+            <hr>
+
+            {{ form_row(form.description, {'label': 'Description'}) }}
+
+            <hr>
+
+            <h2>Tasks</h2>
+            <div class="row">
+                {% if form.tasks.vars.errors|length %}
+                <div class="col-sm-12 my-2 alert alert-danger" role="alert">
+                    {{ form_errors(form.tasks) }}
+                </div>
+                {% endif %}
+                {% set taskGroup = null %}
+                {% for taskType in form.tasks %}
+                    {% set task = taskFactory.createTask(taskType.vars.value) %}
+                    {% if taskGroup != task.group or loop.first %}
+                        <div class="col-sm-12 my-2 alert alert-secondary" role="alert">{{ task.group }}</div>
+                    {% endif %}
+                    <div class="col-sm-6 my-1">
+                        <div class="card">
+                            <div class="card-header">
+                                {{ task.label }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ task.description }}</p>
+                                <p class="card-text">
+                                    <code>{{ task.command }}</code>
+                                </p>
+                                {{ form_widget(taskType) }}
+                            </div>
+                        </div>
+                    </div>
+                    {% set taskGroup = task.group %}
+                {% endfor %}
+            </div>
+
+            <hr>
+
+            {{ form_row(form.save) }}
+
+            {{ form_end(form) }}
+        {% endfor %}
+    </div>
+{% endblock %}

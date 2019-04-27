@@ -50,7 +50,7 @@ class Client
         return $response->toArray();
     }
 
-    public function getJobs(): string
+    public function getJobs(): array
     {
         $response = $this->httpClient->request(
             Request::METHOD_GET,
@@ -61,7 +61,21 @@ class Client
             ]
         );
 
-        return $response->getContent();
+        return $response->toArray();
+    }
+
+    public function getProjects(): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_GET,
+            '/projects',
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        return $response->toArray();
     }
 
     public function createProject(string $repo, bool $isPrivate = false): array

@@ -10,10 +10,12 @@ class Task
      * @Assert\NotBlank()
      */
     private $tool;
+    private $label;
 
-    public function __construct(string $tool)
+    public function __construct(string $tool, string $label)
     {
         $this->tool = $tool;
+        $this->label = $label;
     }
 
     public function getTool(): string
@@ -21,19 +23,23 @@ class Task
         return $this->tool;
     }
 
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
     public function getCommand(): string
     {
-        switch ($this->tool) {
-            case 'lint:yaml':
-                return 'php bin/console lint:twig --format=json config';
-            case 'lint:xliff':
-                return 'php bin/console lint:xliff --format=json translations';
-            case 'lint:twig':
-                return 'php bin/console lint:twig --format=json templates';
-            case 'phpmd':
-                return 'phpmd src xml "cleancode,codesize,controversial,design,naming,unusedcode"';
-            default:
-                return '';
-        }
+        return '';
+    }
+
+    public function getGroup(): string
+    {
+        return '';
+    }
+
+    public function getDescription(): string
+    {
+        return '';
     }
 }

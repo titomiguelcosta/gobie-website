@@ -3,14 +3,6 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <h1 class="display-4">Grooming Chimps</h1>    
-    <div class="clearfix">
-        <p class="lead float-left">Login</p>
-
-        <div class="menu float-right">
-            <span><a href="{{ url("homepage") }}">Homepage</a></span>
-        </div>
-    </div>
     <div class="jumbotron">
         {{ form_start(form) }}
             {% if error %}

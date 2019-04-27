@@ -9,8 +9,24 @@
     </head>
     <body>
         <div class="container">
+            {% block header %}
+                <h1 class="display-4">
+                    <a href="{{ path("homepage") }}">Grooming Chimps</a>
+                </h1>
+                <div class="clearfix">
+                    <p class="lead float-left">Code analyses of source code</p>
+
+                    {% include 'include/menu.html.twig' %}
+                </div>
+            {% endblock %}
+
             {% block body %}{% endblock %}
         </div>
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted float-right">By <a href="https://www.titomiguelcosta.com/" target="_blank">Tito Miguel Costa</a> &copy; 2019</span>
+            </div>
+        </footer>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

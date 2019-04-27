@@ -1,43 +1,15 @@
 {% extends "base.html.twig" %}
 
+{% block header %}{% endblock %}
+
 {% block body %}
-    <h1 class="display-4">Grooming Chimps</h1>    
-    <div class="clearfix">
-        <p class="lead float-left">Code analyses for PHP projects</p>
-
-        <div class="menu float-right">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <span>Hi {{ app.user.username }}! <a href="{{ url('app_logout') }}">Logout</a></span>
-        {% else %}
-            <span><a href="{{ url("app_login") }}">Login</a></span>
-        {% endif %}
-        </div>
-    </div>
-    <div class="jumbotron">
-        {% for repo in app.flashes('repo') %}
-            <div class="alert">
-                <strong>Job submitted...</strong> 
-                <p>Analysing repo <strong>{{ repo }}</strong>! {% if app.flashes('email') | length > 0 %}Expect an e-mail soon.{% endif %}</p>
-            </div>
-        {% else %}
-            {{ form_start(form) }}
-
-            {{ form_row(form.repo) }}
-            {{ form_row(form.branch) }}
-
-            <hr>
-            
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseDetails" role="button" aria-expanded="false" aria-controls="collapseDetails">Details</a>
-            <hr>
-            <fieldset class="collapse" id="collapseDetails">
-                {{ form_row(form.description, {'label': 'Description'}) }}
-            </fieldset>
-
-            <fieldset>
-                <legend>Tasks</legend>
-                {{ form_row(form.tasks, {'label': false}) }}
-            </fieldset>
-            {{ form_end(form) }}
-        {% endfor %}
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Grooming Chimps</h1>
+            <p class="lead">This is an experimental project. Only invited users can access it.</p>
+            <p class="lead">
+                <a href="{{ path('app_login') }}" class="btn btn-lg btn-secondary">Login</a>
+            </p>
+        </main>
     </div>
 {% endblock %}
