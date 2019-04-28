@@ -13,7 +13,7 @@ class LintTwig extends Task
 
     public function getDescription(): string
     {
-        return 'Validate Twig templates.';
+        return 'Validate Twig templates';
     }
 
     public function getCommand(): string

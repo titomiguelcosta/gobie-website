@@ -1,60 +1,59 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="jumbotron">
-        {% for repo in app.flashes('repo') %}
-            <div class="alert">
-                <strong>Job submitted...</strong> 
-                <p>Analysing repo <strong>{{ repo }}</strong>! {% if app.flashes('email') | length > 0 %}Expect an e-mail soon.{% endif %}</p>
+    {% for repo in app.flashes('repo') %}
+        <div class="alert">
+            <strong>Job submitted</strong>
+
+            <p>A gang of chimps will now nalyse the repo <strong>{{ repo }}</strong>!</p>
+
+            <p>They will let you know when the task is complete. Expect an e-mail soon.</p>
+        </div>
+    {% else %}
+        {{ form_start(form) }}
+
+        {{ form_row(form.repo) }}
+        {{ form_row(form.branch) }}
+
+        <hr>
+
+        {{ form_row(form.description, {'label': 'Description'}) }}
+
+        <hr>
+
+        <h3>Tasks</h3>
+        <div class="row">
+            {% if form.tasks.vars.errors|length %}
+            <div class="col-sm-12 my-2 alert alert-danger" role="alert">
+                {{ form_errors(form.tasks) }}
             </div>
-        {% else %}
-            {{ form_start(form) }}
-
-            {{ form_row(form.repo) }}
-            {{ form_row(form.branch) }}
-
-            <hr>
-
-            {{ form_row(form.description, {'label': 'Description'}) }}
-
-            <hr>
-
-            <h2>Tasks</h2>
-            <div class="row">
-                {% if form.tasks.vars.errors|length %}
-                <div class="col-sm-12 my-2 alert alert-danger" role="alert">
-                    {{ form_errors(form.tasks) }}
-                </div>
+            {% endif %}
+            {% set taskGroup = null %}
+            {% for taskType in form.tasks %}
+                {% set task = taskFactory.createTask(taskType.vars.value) %}
+                {% if taskGroup != task.group or loop.first %}
+                    <div class="col-sm-12 my-2 py-3 bg-danger text-light" role="alert">{{ task.group }}</div>
                 {% endif %}
-                {% set taskGroup = null %}
-                {% for taskType in form.tasks %}
-                    {% set task = taskFactory.createTask(taskType.vars.value) %}
-                    {% if taskGroup != task.group or loop.first %}
-                        <div class="col-sm-12 my-2 alert alert-secondary" role="alert">{{ task.group }}</div>
-                    {% endif %}
-                    <div class="col-sm-6 my-1">
-                        <div class="card">
-                            <div class="card-header">
-                                {{ task.label }}
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ task.description }}</p>
-                                <p class="card-text">
-                                    <code>{{ task.command }}</code>
-                                </p>
-                                {{ form_widget(taskType) }}
-                            </div>
+                <div class="col-sm-6 my-1">
+                    <div class="card bg-light">
+                        <div class="card-header text-dark">{{ task.label }}</div>
+                        <div class="card-body bg-dark-blue">
+                            <p class="card-text text-black-50">{{ task.description }}</p>
+                            <p class="card-text text-dark">
+                                <code>{{ task.command }}</code>
+                            </p>
+                            {{ form_widget(taskType, {'label_attr': {'class': 'text-dark'}}) }}
                         </div>
                     </div>
-                    {% set taskGroup = task.group %}
-                {% endfor %}
-            </div>
+                </div>
+                {% set taskGroup = task.group %}
+            {% endfor %}
+        </div>
 
-            <hr>
+        <hr>
 
-            {{ form_row(form.save) }}
+        {{ form_row(form.save) }}
 
-            {{ form_end(form) }}
-        {% endfor %}
-    </div>
+        {{ form_end(form) }}
+    {% endfor %}
 {% endblock %}

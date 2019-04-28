@@ -1,6 +1,6 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <nav class="nav nav-pills justify-content-end">
-        <span class="nav-item nav-link">Hi <strong>{{ app.user.username }}</strong>!</span>
+        <span class="nav-item nav-link">Hi <strong>{{ app.user.username }}</strong></span>
         <span class="nav-item">
             <a class="nav-link{% if menu == 'projects' %} active{% endif %}" href="{{ url('project_list') }}">Projects</a>
         </span>
@@ -10,6 +10,9 @@
     </nav>
 {% else %}
     <nav class="nav nav-pills justify-content-end">
+        <span class="nav-item">
+            <a class="nav-link{% if menu == 'homepage' %} active{% endif %}" href="{{ url("homepage") }}">Homepage</a>
+        </span>
         <span class="nav-item">
             <a class="nav-link{% if menu == 'login' %} active{% endif %}" href="{{ url("app_login") }}">Login</a>
         </span>

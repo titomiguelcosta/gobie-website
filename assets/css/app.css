@@ -1,6 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap";
 
 body {
-    background-color: lightgray;
+    background-color: #e6e6e6;
 }
 
+.bg-dark-extra {
+    background-color: #333 !important;
+}

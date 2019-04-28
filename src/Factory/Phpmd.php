@@ -13,7 +13,7 @@ class Phpmd extends Task
 
     public function getDescription(): string
     {
-        return 'Evaluate the quality of the source code.';
+        return 'Evaluate the quality of the source code';
     }
 
     public function getCommand(): string

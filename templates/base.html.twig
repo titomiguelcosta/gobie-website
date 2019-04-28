@@ -8,25 +8,32 @@
         {% endblock %}
     </head>
     <body>
-        <div class="container">
+        {% block navigation %}{% endblock %}
+        <div class="container py-2">
             {% block header %}
                 <h1 class="display-4">
                     <a href="{{ path("homepage") }}">Grooming Chimps</a>
                 </h1>
                 <div class="clearfix">
-                    <p class="lead float-left">Code analyses of source code</p>
+                    <p class="lead float-left text-muted">Analyses of source code</p>
 
                     {% include 'include/menu.html.twig' %}
                 </div>
             {% endblock %}
-
-            {% block body %}{% endblock %}
         </div>
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted float-right">By <a href="https://www.titomiguelcosta.com/" target="_blank">Tito Miguel Costa</a> &copy; 2019</span>
+
+        <div class="container-fluid bg-dark py-3 text-white-50">
+            <div class="container py-4">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+
+        <footer class="footer py-2 bg-dark-extra">
+            <div class="container text-right">
+                <span class="text-muted">by <a href="https://www.titomiguelcosta.com/" target="_blank">alpha male</a> &copy; 2019</span>
             </div>
         </footer>
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

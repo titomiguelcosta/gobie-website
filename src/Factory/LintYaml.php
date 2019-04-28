@@ -13,7 +13,7 @@ class LintYaml extends Task
 
     public function getDescription(): string
     {
-        return 'Validate Yaml templates.';
+        return 'Validate Yaml templates';
     }
 
     public function getCommand(): string

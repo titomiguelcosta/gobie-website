@@ -13,7 +13,7 @@ class LintXliff extends Task
 
     public function getDescription(): string
     {
-        return 'Validate Xliff templates.';
+        return 'Validate Xliff templates';
     }
 
     public function getCommand(): string

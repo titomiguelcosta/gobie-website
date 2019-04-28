@@ -1,23 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="jumbotron">
-        {% for project in projects %}
-            {% if loop.first %}
-                <ul>
-            {% endif %}
-                    <li>{{ project.repo }}</li>
-            {% if loop.last %}
-                </ul>
-            {% endif %}
-        {% else %}
-            <p>No projects. <a href="{{ path('homepage') }}">Create one</a>.</p>
-        {% endfor %}
+    {% for project in projects %}
+        {% if loop.first %}
+            <ul>
+        {% endif %}
+                <li>{{ project.repo }}</li>
+        {% if loop.last %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>No projects. <a href="{{ path('homepage') }}">Create one</a>.</p>
+    {% endfor %}
 
-        <hr>
+    <hr>
 
-        <div class="form-group">
-            <a href="{{  path('project_new') }}" type="button" class="btn btn-primary">New</a>
-        </div>
+    <div class="form-group">
+        <a href="{{  path('project_new') }}" role="button" class="btn btn-primary">New</a>
     </div>
 {% endblock %}
