@@ -2,20 +2,54 @@
 
 {% block body %}
     {% for project in projects %}
-        {% if loop.first %}
-            <ul>
-        {% endif %}
-                <li>{{ project.repo }}</li>
-        {% if loop.last %}
-            </ul>
-        {% endif %}
+        <div class="col-sm-12 my-2 py-3 bg-danger text-light" role="alert">
+            <a class="text-white" data-toggle="collapse" href="#project{{ project.id }}" aria-expanded="false" aria-controls="project{{ project.id }}">
+                {{ project.description }}
+            </a>
+        </div>
+
+        <div class="collapse" id="project{{ project.id }}">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Repo</th>
+                        <th scope="col">Private</th>
+                        <th scope="col">Created by</th>
+                        <th scope="col">Created at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ project.sanitizedRepo }}</td>
+                        <td>{{ project.isPrivate }}</td>
+                        <td>{{ project.createdBy.username }}</td>
+                        <td>{{ project.createdAt }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <p>No projects. <a href="{{ path('homepage') }}">Create one</a>.</p>
+        <p role="alert" class="alert alert-danger">No projects.</p>
     {% endfor %}
 
     <hr>
 
+    {% if pagination %}
+    <nav aria-label="pagination of projects">
+        <ul class="pagination justify-content-end">
+            <li class="page-item {% if pagination["hydra:previous"] is not defined %}disabled{% endif %}">
+                <a class="page-link" href="{% if pagination["hydra:previous"] is defined %}{{ pagination["hydra:previous"] }}{% else %}#{% endif %}" {% if pagination["hydra:next"] is not defined %}tabindex="-1" aria-disabled="true"{% endif %}>Previous</a>
+            </li>
+            <li class="page-item {% if pagination["hydra:next"] is not defined %}disabled{% endif %}">
+                <a class="page-link" href="{% if pagination["hydra:next"] is defined %}{{ pagination["hydra:next"] }}{% else %}#{% endif %}" {% if pagination["hydra:next"] is not defined %}tabindex="-1" aria-disabled="true"{% endif %}>Next</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <hr>
+    {% endif %}
+
     <div class="form-group">
-        <a href="{{  path('project_new') }}" role="button" class="btn btn-primary">New</a>
+        <a href="{{ path('project_new') }}" role="button" class="btn btn-primary">New</a>
     </div>
 {% endblock %}

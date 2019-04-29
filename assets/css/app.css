@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap";
+@import "~octicons/build/font/octicons.min";
 
 body {
     background-color: #e6e6e6;

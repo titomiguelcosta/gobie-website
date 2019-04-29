@@ -64,7 +64,7 @@ class Client
         return $response->toArray();
     }
 
-    public function getProjects(): array
+    public function getProjects(string $page = '1'): array
     {
         $response = $this->httpClient->request(
             Request::METHOD_GET,
@@ -72,6 +72,9 @@ class Client
             [
                 'headers' => $this->getHeaders(),
                 'auth_bearer' => $this->getAuthBearer(),
+                'query' => [
+                    'p' => $page
+                ]
             ]
         );
 

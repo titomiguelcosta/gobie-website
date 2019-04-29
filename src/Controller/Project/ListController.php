@@ -3,10 +3,10 @@
 namespace App\Controller\Project;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class ListController extends AbstractController
 {
@@ -16,8 +16,11 @@ class ListController extends AbstractController
      */
     public function __invoke(Request $request, GroomingChimpsApiClient $client)
     {
+        $data = $client->getProjects($request->query->get('p', '1'));
+
         return $this->render('project/list.html.twig', [
-            'projects' => $client->getProjects()['hydra:member'],
+            'projects' => $data['hydra:member'],
+            'pagination' => $data['hydra:view'] ?? false,
             'menu' => 'projects'
         ]);
     }
