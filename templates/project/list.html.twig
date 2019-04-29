@@ -35,26 +35,28 @@
             </table>
 
             {% if project.jobs | length > 0 %}
-            <table class="table table-dark">
-                <tbody>
-                    {% for job in project.jobs  %}
-                        <tr class="bg-success">
-                            <td>
-                                <div class="mt-1">
-                                    branch <strong>{{ job.branch }}</strong> with a status of <strong>{{ job.status }}</strong>
+                {% for job in project.jobs %}
+                    <div class="row my-2 mx-1 p-2 bg-success">
+                        <div class="col-9 mt-1 mx-0 px-2">
+                            branch <strong>{{ job.branch }}</strong> with a status of <strong>{{ job.status }}</strong>
+                        </div>
+
+                        <div class="col-3 btn-group mx-0 px-2" role="group" aria-label="job actions">
+                            <a href="{{ path('job_view', {'id': job.id}) }}" role="button" class="btn btn-secondary btn-sm">Details</a>
+                            <a href="#" role="button" class="btn btn-secondary btn-sm">Re-Submit</a>
+                            <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+
+                        {% for task in job.tasks %}
+                            <div class="col-6 mt-2 mb-0 mx-0 py-2 px-0 bg-primary">
+                                <span class="px-3 mt-1">tool <strong>{{ task.tool }}</strong> with a status of <strong>{{ task.status }}</strong></span>
+                                <div class="btn-group mx-3 float-right" role="group" aria-label="task actions">
+                                    <a href="{{ path('task_delete', {'id': task.id}) }}" role="button" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
-                            </td>
-                            <td class="text-right">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ path('job_view', {'id': job.id}) }}" role="button" class="btn btn-secondary btn-sm">Details</a>
-                                    <a href="#" role="button" class="btn btn-secondary btn-sm">Re-Submit</a>
-                                    <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger btn-sm">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             {% endif %}
         </div>
     {% else %}

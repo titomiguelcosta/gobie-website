@@ -202,6 +202,27 @@ class Client
         return $responses;
     }
 
+    public function deleteTask(int $id): bool
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_DELETE,
+            sprintf('/tasks/%d', $id),
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        try {
+            $deleted = Response::HTTP_NO_CONTENT === $response->getStatusCode();
+        } catch (ExceptionInterface $exception) {
+            // ToDo: Log this exception
+            $deleted = false;
+        }
+
+        return $deleted;
+    }
+
     private function getHeaders(): array
     {
         $headers = [

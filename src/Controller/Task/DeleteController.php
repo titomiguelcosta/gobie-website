@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Job;
+namespace App\Controller\Task;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
@@ -14,16 +14,16 @@ class DeleteController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/jobs/{id}/delete", name="job_delete")
+     * @Route("/tasks/{id}/delete", name="task_delete")
      */
     public function __invoke($id, GroomingChimpsApiClient $client)
     {
-        $deleted = $client->deleteJob($id);
+        $deleted = $client->deleteTask($id);
 
         if ($deleted) {
-            $this->addFlash('success', 'Job was deleted.');
+            $this->addFlash('success', 'Task was deleted.');
         } else {
-            $this->addFlash('failed', 'It failed to delete the job.');
+            $this->addFlash('failed', 'It failed to delete the task.');
         }
 
         return $this->redirectToRoute('project_list');
