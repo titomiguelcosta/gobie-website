@@ -2,16 +2,16 @@
 
 {% block body %}
     <div class="row my-2 p-2 bg-danger text-light" role="alert">
-        <div class="col-9">
+        <div class="col text-left align-middle mt-1">
             {{ job.project.description }} for branch {{ job.branch }}
         </div>
-        <div class="col form-group">
+        <div class="col text-right">
             <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-dark">Delete</a>
         </div>
     </div>
 
     <hr>
-    
+
     <h2>Tasks</h2>
 
     <canvas id="myChart" width="400" height="100"></canvas>
