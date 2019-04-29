@@ -1,13 +1,62 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="row my-2 py-2 bg-danger text-light" role="alert">
-        {{ job.project.description }} for branch {{ job.branch }}
+    <div class="row my-2 p-2 bg-danger text-light" role="alert">
+        <div class="col-9">
+            {{ job.project.description }} for branch {{ job.branch }}
+        </div>
+        <div class="col form-group">
+            <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-dark">Delete</a>
+        </div>
     </div>
 
     <hr>
+    
+    <h2>Tasks</h2>
 
-    <div class="form-group">
-        <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger">Delete</a>
-    </div>
+    <canvas id="myChart" width="400" height="100"></canvas>
+{% endblock %}
+
+{%block javascripts %}
+<script>
+    $(function() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}

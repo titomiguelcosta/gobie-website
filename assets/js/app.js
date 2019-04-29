@@ -13,7 +13,9 @@ require('../css/app.css');
 // const $ = require('jquery');
 
 const $ = require('jquery');
+global.$ = global.jQuery = $;
 
 require('bootstrap');
+require('chart.js/dist/Chart.bundle');
 
 console.log('Hello from Grooming Chimps!');
