@@ -2,6 +2,8 @@
 
 namespace App\Api\GroomingChimps;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -50,20 +52,6 @@ class Client
         return $response->toArray();
     }
 
-    public function getJobs(): array
-    {
-        $response = $this->httpClient->request(
-            Request::METHOD_GET,
-            '/jobs',
-            [
-                'headers' => $this->getHeaders(),
-                'auth_bearer' => $this->getAuthBearer(),
-            ]
-        );
-
-        return $response->toArray();
-    }
-
     public function getProjects(string $page = '1'): array
     {
         $response = $this->httpClient->request(
@@ -101,6 +89,27 @@ class Client
         return $response->toArray();
     }
 
+    public function deleteProject(int $id): bool
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_DELETE,
+            sprintf('/projects/%d', $id),
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        try {
+            $deleted = Response::HTTP_NO_CONTENT === $response->getStatusCode();
+        } catch (ExceptionInterface $exception) {
+            // ToDo: Log this exception
+            $deleted = false;
+        }
+
+        return $deleted;
+    }
+
     public function createJob(string $project, string $branch): array
     {
         $response = $this->httpClient->request(
@@ -117,6 +126,55 @@ class Client
         );
 
         return $response->toArray();
+    }
+
+    public function getJobs(): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_GET,
+            '/jobs',
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        return $response->toArray();
+    }
+
+    public function getJob(int $id): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_GET,
+            sprintf('/jobs/%d', $id),
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        return $response->toArray();
+    }
+
+    public function deleteJob(int $id): bool
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_DELETE,
+            sprintf('/jobs/%d', $id),
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        try {
+            $deleted = Response::HTTP_NO_CONTENT === $response->getStatusCode();
+        } catch (ExceptionInterface $exception) {
+            // ToDo: Log this exception
+            $deleted = false;
+        }
+
+        return $deleted;
     }
 
     public function createTasks(string $job, array $tasks): array

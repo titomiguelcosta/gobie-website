@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="row my-2 py-2 bg-danger text-light" role="alert">
+        {{ job.project.description }} for branch {{ job.branch }}
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger">Delete</a>
+    </div>
+{% endblock %}

@@ -2,10 +2,16 @@
 
 {% block body %}
     {% for project in projects %}
-        <div class="col-sm-12 my-2 py-3 bg-danger text-light" role="alert">
-            <a class="text-white" data-toggle="collapse" href="#project{{ project.id }}" aria-expanded="false" aria-controls="project{{ project.id }}">
-                {{ project.description }}
-            </a>
+        <div class="row my-2 py-2 bg-danger text-light" role="alert">
+            <div class="col text-left align-middle mt-1">
+                <a class="text-white" data-toggle="collapse" href="#project{{ project.id }}" aria-expanded="false" aria-controls="project{{ project.id }}">
+                    {{ project.description }}
+                </a>
+            </div>
+
+            <div class="col text-right">
+                <a role="button" class="btn btn-dark btn-sm" href="{{ path('project_delete', {'id': project.id}) }}">Delete</a>
+            </div>
         </div>
 
         <div class="collapse" id="project{{ project.id }}">
@@ -27,6 +33,29 @@
                     </tr>
                 </tbody>
             </table>
+
+            {% if project.jobs | length > 0 %}
+            <table class="table table-dark">
+                <tbody>
+                    {% for job in project.jobs  %}
+                        <tr class="bg-success">
+                            <td>
+                                <div class="mt-1">
+                                    branch <strong>{{ job.branch }}</strong> with a status of <strong>{{ job.status }}</strong>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ path('job_view', {'id': job.id}) }}" role="button" class="btn btn-secondary btn-sm">Details</a>
+                                    <a href="#" role="button" class="btn btn-secondary btn-sm">Re-Submit</a>
+                                    <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger btn-sm">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
         </div>
     {% else %}
         <p role="alert" class="alert alert-danger">No projects.</p>

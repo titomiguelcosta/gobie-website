@@ -17,7 +17,7 @@ class NewController extends AbstractController
 {
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/project/new", name="project_new")
+     * @Route("/projects/new", name="project_new")
      */
     public function __invoke(
         Request $request, Security $security, GroomingChimpsApiClient $client, TaskFactory $taskFactory
