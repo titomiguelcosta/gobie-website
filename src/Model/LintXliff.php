@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Factory;
+namespace App\Model;
 
 use App\Entity\Task;
 
 class LintXliff extends Task
 {
+    public const TOOL = 'lint:xliff';
+
     public function __construct()
     {
-        parent::__construct('lint:xliff', 'Xliff');
+        parent::__construct(self::TOOL, 'Xliff');
     }
 
     public function getDescription(): string

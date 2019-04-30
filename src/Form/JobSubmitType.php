@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Security;
-use App\Entity\User;
 use App\Entity\Task;
 
 class JobSubmitType extends AbstractType
@@ -53,12 +52,6 @@ class JobSubmitType extends AbstractType
                 'required' => true
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit Job']);
-
-
-
-        if ($this->security->getUser() instanceof User && $this->security->getUser()->getEmail()) {
-            $builder->remove('email');
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

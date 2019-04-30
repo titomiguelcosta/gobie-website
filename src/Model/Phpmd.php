@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Factory;
+namespace App\Model;
 
 use App\Entity\Task;
 
 class Phpmd extends Task
 {
+    public const TOOL = 'phpmd';
+
     public function __construct()
     {
-        parent::__construct('phpmd', 'phpmd');
+        parent::__construct(self::TOOL, 'phpmd');
     }
 
     public function getDescription(): string

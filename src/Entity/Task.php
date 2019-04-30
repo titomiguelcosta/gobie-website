@@ -12,6 +12,10 @@ class Task
     private $tool;
     private $label;
 
+    protected $output;
+    protected $errorOutput;
+    protected $graph;
+
     public function __construct(string $tool, string $label)
     {
         $this->tool = $tool;
@@ -41,5 +45,46 @@ class Task
     public function getDescription(): string
     {
         return '';
+    }
+
+    public function getErrorOutput(): ?string
+    {
+        return $this->errorOutput;
+    }
+
+    public function setErrorOutput(string $errorOutput = null): self
+    {
+        $this->errorOutput = $errorOutput;
+
+        return $this;
+    }
+
+    public function getOutput(): ?string
+    {
+        return $this->output;
+    }
+
+    public function setOutput(string $output = null): self
+    {
+        $this->output = $output;
+
+        return $this;
+    }
+
+    public function getGraph()
+    {
+        return $this->graph;
+    }
+
+    public function setGraph(array $data = []): self
+    {
+        $this->graph = $data;
+
+        return $this;
+    }
+
+    public function getNumErrors()
+    {
+        return $this->graph['errors']['total'] ?? 0;
     }
 }

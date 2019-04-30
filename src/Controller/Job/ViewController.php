@@ -2,9 +2,10 @@
 
 namespace App\Controller\Job;
 
+use App\Factory\TaskFactory;
+use App\Graph\TaskAggregator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,12 +15,13 @@ class ViewController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/jobs/{id}", name="job_view")
      */
-    public function __invoke($id, GroomingChimpsApiClient $client)
+    public function __invoke($id, GroomingChimpsApiClient $client, TaskFactory $factory)
     {
         $job = $client->getJob($id);
+        $aggregator = new TaskAggregator($factory, $job['tasks']);
 
         return $this->render('job/view.html.twig', [
-            'job' => $job, 'menu' => 'job_view'
+            'job' => $job, 'menu' => 'job_view', 'aggregator' => $aggregator
         ]);
     }
 }

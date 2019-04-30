@@ -11,7 +11,6 @@ use App\Entity\JobSubmit;
 use Symfony\Component\HttpFoundation\Request;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Symfony\Component\Security\Core\Security;
-use App\Entity\User;
 
 class NewController extends AbstractController
 {
@@ -30,14 +29,8 @@ class NewController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var $user User */
-            $user = $security->getUser();
             /** @var $jobSubmit JobSubmit */
             $jobSubmit = $form->getData();
-            if ($user->getEmail()) {
-                $jobSubmit->setEmail($user->getEmail());
-                $this->addFlash('email', $user->getEmail());
-            }
             $project = $client->createProject($jobSubmit->getRepo(), $jobSubmit->isPrivate());
             $job = $client->createJob($project['@id'], $jobSubmit->getBranch());
             $client->createTasks($job['@id'], $jobSubmit->getTasks());

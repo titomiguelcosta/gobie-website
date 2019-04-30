@@ -14,20 +14,20 @@
 
     <h2>Tasks</h2>
 
-    <canvas id="myChart" width="400" height="100"></canvas>
+    <canvas id="errorsChart" width="400" height="100"></canvas>
 {% endblock %}
 
 {%block javascripts %}
 <script>
     $(function() {
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx = document.getElementById('errorsChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: {{ aggregator.labels|json_encode|raw }},
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# of Errors',
+                    data: {{ aggregator.errors|json_encode|raw }},
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

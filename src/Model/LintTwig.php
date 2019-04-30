@@ -1,24 +1,26 @@
 <?php
 
-namespace App\Factory;
+namespace App\Model;
 
 use App\Entity\Task;
 
-class LintYaml extends Task
+class LintTwig extends Task
 {
+    public const TOOL = 'lint:twig';
+
     public function __construct()
     {
-        parent::__construct('lint:yaml', 'Yaml');
+        parent::__construct(self::TOOL, 'Twig');
     }
 
     public function getDescription(): string
     {
-        return 'Validate Yaml templates';
+        return 'Validate Twig templates';
     }
 
     public function getCommand(): string
     {
-        return 'php bin/console lint:yaml --format=json config';
+        return 'php bin/console lint:twig --format=json templates';
     }
 
     public function getGroup(): string

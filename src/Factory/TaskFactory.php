@@ -3,22 +3,29 @@
 namespace App\Factory;
 
 use App\Entity\Task;
+use App\Model\LintTwig;
+use App\Model\LintXliff;
+use App\Model\LintYaml;
+use App\Model\Phpmd;
+use App\Model\SecurityCheck;
 use RuntimeException;
 
 class TaskFactory
 {
     private $map = [
-        'lint:twig' => LintTwig::class,
-        'lint:yaml' => LintYaml::class,
-        'lint:xliff' => LintXliff::class,
-        'phpmd' => Phpmd::class,
+        LintTwig::TOOL => LintTwig::class,
+        LintYaml::TOOL => LintYaml::class,
+        LintXliff::TOOL => LintXliff::class,
+        Phpmd::TOOL => Phpmd::class,
+        SecurityCheck::TOOL => SecurityCheck::class,
     ];
 
     private $tasks = [
-        'lint:twig' => null,
-        'lint:xliff' => null,
-        'lint:yaml' => null,
-        'phpmd' => null,
+        LintTwig::TOOL => null,
+        LintXliff::TOOL => null,
+        LintYaml::TOOL => null,
+        Phpmd::TOOL => null,
+        SecurityCheck::TOOL => null,
     ];
 
     /**
@@ -27,10 +34,11 @@ class TaskFactory
     public function getTasks(): array
     {
         return [
-            $this->createTask('lint:twig'),
-            $this->createTask('lint:xliff'),
-            $this->createTask('lint:yaml'),
-            $this->createTask('phpmd'),
+            $this->createTask(LintYaml::TOOL),
+            $this->createTask(LintXliff::TOOL),
+            $this->createTask(LintTwig::TOOL),
+            $this->createTask(Phpmd::TOOL),
+            $this->createTask(SecurityCheck::TOOL),
         ];
     }
 
