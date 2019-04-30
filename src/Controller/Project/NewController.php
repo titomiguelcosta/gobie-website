@@ -31,7 +31,7 @@ class NewController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var $jobSubmit JobSubmit */
             $jobSubmit = $form->getData();
-            $project = $client->createProject($jobSubmit->getRepo(), $jobSubmit->isPrivate());
+            $project = $client->createProject($jobSubmit->getRepo(), $jobSubmit->getDescription(), $jobSubmit->isPrivate());
             $job = $client->createJob($project['@id'], $jobSubmit->getBranch());
             $client->createTasks($job['@id'], $jobSubmit->getTasks());
 

@@ -69,7 +69,7 @@ class Client
         return $response->toArray();
     }
 
-    public function createProject(string $repo, bool $isPrivate = false): array
+    public function createProject(string $repo, string $description, bool $isPrivate = false): array
     {
         $user = $this->security->getUser();
         $response = $this->httpClient->request(
@@ -80,7 +80,8 @@ class Client
                 'json' => [
                     'repo' => $repo,
                     'isPrivate' => $isPrivate,
-                    'createdBy' => $user instanceof User ? $user->getId() : null,
+                    'description' => $description,
+                    'createdBy' => $user->getId(),
                 ],
                 'auth_bearer' => $this->getAuthBearer(),
             ]
