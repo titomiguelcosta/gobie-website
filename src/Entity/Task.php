@@ -15,6 +15,7 @@ class Task
     protected $output;
     protected $errorOutput;
     protected $graph;
+    protected $exitCode;
 
     public function __construct(string $tool, string $label)
     {
@@ -67,6 +68,18 @@ class Task
     public function setOutput(string $output = null): self
     {
         $this->output = $output;
+
+        return $this;
+    }
+
+    public function getExitCode(): ?int
+    {
+        return $this->exitCode;
+    }
+
+    public function setExitCode(int $exitCode): self
+    {
+        $this->exitCode = $exitCode;
 
         return $this;
     }

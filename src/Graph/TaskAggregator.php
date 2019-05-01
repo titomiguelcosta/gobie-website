@@ -52,6 +52,7 @@ class TaskAggregator
             $task->setGraph($taskData['graph']);
             $task->setOutput($taskData['output']);
             $task->setErrorOutput($taskData['errorOutput']);
+            $task->setExitCode($taskData['exitCode']);
 
             $this->tasks[] = $task;
         }
