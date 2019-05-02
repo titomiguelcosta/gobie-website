@@ -37,7 +37,7 @@ class NewController extends AbstractController
 
             $this->addFlash('repo', $jobSubmit->getRepo());
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('project_new');
         }
 
         return $this->render('project/new.html.twig', [
