@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row my-2 p-2 bg-danger text-light" role="alert">
         <div class="col text-left align-middle mt-1">
-            {{ job.project.description }} for branch {{ job.branch }}
+            </strong>{{ job.project.description }}</strong> for branch <strong>{{ job.branch }}</strong>
         </div>
         <div class="col text-right">
             <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-dark">Delete</a>
@@ -12,9 +12,52 @@
 
     <hr>
 
-    <h2>Tasks</h2>
-
     <canvas id="errorsChart" width="400" height="100"></canvas>
+
+    <hr>
+
+    {% for task in job.tasks %}
+        <div class="row my-2 p-2 bg-dark text-light" role="alert">
+            <a class="alert-link" data-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseTask{{ task.id }}">
+                {{ task.tool }}
+            </a>
+        </div>
+
+        <div class="collapse" id="collapseTask{{ task.id }}">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Started</th>
+                    <th scope="col">Finished</th>
+                    <th scope="col">Exit Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ task.id }}</th>
+                        <td>{{ task.status }}</td>
+                        <td>{{ task.startedAt }}</td>
+                        <td>{{ task.finishedAt }}</td>
+                        <td>{{ task.exitCode }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {% if task.output %}
+                <h3>Output</h3>
+                <code>{{ task.output }}</code>
+
+                <hr>
+            {% endif %}
+
+            {% if task.errorOutput %}
+                <h3>Errors</h3>
+                <code>{{ task.errorOutput }}</code>
+            {% endif %}
+        </div>
+    {% endfor %}
 {% endblock %}
 
 {%block javascripts %}

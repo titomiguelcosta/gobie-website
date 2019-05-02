@@ -77,9 +77,9 @@ class Task
         return $this->exitCode;
     }
 
-    public function setExitCode(int $exitCode): self
+    public function setExitCode(?int $exitCode): self
     {
-        $this->exitCode = $exitCode;
+        $this->exitCode = $exitCode ?? 0;
 
         return $this;
     }
