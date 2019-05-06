@@ -6,7 +6,7 @@ use App\Entity\Task;
 
 class Phpstan extends Task
 {
-    public const TOOL = 'phpstand';
+    public const TOOL = 'phpstan';
 
     public function __construct()
     {
