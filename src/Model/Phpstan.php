@@ -20,7 +20,7 @@ class Phpstan extends Task
 
     public function getCommand(): string
     {
-        return 'phpstan analyse -l 4 --error-format json {{ path }}/src';
+        return 'phpstan analyse --no-progress -n -l 5 --error-format json {{ path }}/src';
     }
 
     public function getGroup(): string
