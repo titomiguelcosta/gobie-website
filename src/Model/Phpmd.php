@@ -11,6 +11,9 @@ class Phpmd extends Task
     public function __construct()
     {
         parent::__construct(self::TOOL, 'phpmd');
+        $this->setOptions([
+            'cwd' => true
+        ]);
     }
 
     public function getDescription(): string
@@ -20,7 +23,7 @@ class Phpmd extends Task
 
     public function getCommand(): string
     {
-        return 'phpmd {{ path }}/src xml "cleancode,codesize,controversial,design,naming,unusedcode"';
+        return 'phpmd src xml "cleancode,codesize,controversial,design,naming,unusedcode"';
     }
 
     public function getGroup(): string

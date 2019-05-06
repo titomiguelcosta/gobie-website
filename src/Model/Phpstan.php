@@ -11,6 +11,9 @@ class Phpstan extends Task
     public function __construct()
     {
         parent::__construct(self::TOOL, 'phpstan');
+        $this->setOptions([
+            'cwd' => true
+        ]);
     }
 
     public function getDescription(): string
@@ -20,7 +23,7 @@ class Phpstan extends Task
 
     public function getCommand(): string
     {
-        return 'phpstan analyse --no-progress -n -l 5 --error-format json {{ path }}/src';
+        return 'phpstan analyse --no-progress -n -l 5 --error-format json src';
     }
 
     public function getGroup(): string
