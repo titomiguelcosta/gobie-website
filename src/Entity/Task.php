@@ -13,6 +13,7 @@ class Task
     private $label;
 
     protected $output;
+    protected $options;
     protected $errorOutput;
     protected $graph;
     protected $exitCode;
@@ -68,6 +69,18 @@ class Task
     public function setOutput(string $output = null): self
     {
         $this->output = $output;
+
+        return $this;
+    }
+
+    public function getOptions(): ?array
+    {
+        return $this->options;
+    }
+
+    public function setOptions(array $options = null): self
+    {
+        $this->options = $options;
 
         return $this;
     }

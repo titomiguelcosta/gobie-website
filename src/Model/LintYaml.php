@@ -20,7 +20,7 @@ class LintYaml extends Task
 
     public function getCommand(): string
     {
-        return 'php bin/console lint:yaml --format=json config';
+        return 'php bin/console lint:yaml --format=json {{ path }}/config';
     }
 
     public function getGroup(): string

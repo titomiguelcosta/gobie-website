@@ -20,7 +20,7 @@ class LintTwig extends Task
 
     public function getCommand(): string
     {
-        return 'php bin/console lint:twig --format=json templates';
+        return 'php bin/console lint:twig --format=json {{ path }}/templates';
     }
 
     public function getGroup(): string

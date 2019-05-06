@@ -20,7 +20,7 @@ class Phpmd extends Task
 
     public function getCommand(): string
     {
-        return 'phpmd src xml "cleancode,codesize,controversial,design,naming,unusedcode"';
+        return 'phpmd {{ path }}/src xml "cleancode,codesize,controversial,design,naming,unusedcode"';
     }
 
     public function getGroup(): string

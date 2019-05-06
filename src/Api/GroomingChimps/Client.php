@@ -192,6 +192,7 @@ class Client
                         'job' => $job,
                         'tool' => $task->getTool(),
                         'command' => $task->getCommand(),
+                        'options' => $task->getOptions(),
                     ],
                     'auth_bearer' => $this->getAuthBearer(),
                 ]

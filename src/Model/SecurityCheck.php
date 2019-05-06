@@ -11,6 +11,9 @@ class SecurityCheck extends Task
     public function __construct()
     {
         parent::__construct(self::TOOL, 'Security Check');
+        $this->setOptions([
+            'cwd' => true
+        ]);
     }
 
     public function getDescription(): string

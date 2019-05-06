@@ -20,7 +20,7 @@ class LintXliff extends Task
 
     public function getCommand(): string
     {
-        return 'php bin/console lint:xliff --format=json translations';
+        return 'php bin/console lint:xliff --format=json {{ path }}/translations';
     }
 
     public function getGroup(): string
