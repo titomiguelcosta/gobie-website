@@ -7,6 +7,7 @@ use App\Model\LintTwig;
 use App\Model\LintXliff;
 use App\Model\LintYaml;
 use App\Model\Phpmd;
+use App\Model\Phpstan;
 use App\Model\SecurityCheck;
 use RuntimeException;
 
@@ -17,6 +18,7 @@ class TaskFactory
         LintYaml::TOOL => LintYaml::class,
         LintXliff::TOOL => LintXliff::class,
         Phpmd::TOOL => Phpmd::class,
+        Phpstan::TOOL => Phpstan::class,
         SecurityCheck::TOOL => SecurityCheck::class,
     ];
 
@@ -25,6 +27,7 @@ class TaskFactory
         LintXliff::TOOL => null,
         LintYaml::TOOL => null,
         Phpmd::TOOL => null,
+        Phpstan::TOOL => null,
         SecurityCheck::TOOL => null,
     ];
 
@@ -38,6 +41,7 @@ class TaskFactory
             $this->createTask(LintXliff::TOOL),
             $this->createTask(LintTwig::TOOL),
             $this->createTask(Phpmd::TOOL),
+            $this->createTask(Phpstan::TOOL),
             $this->createTask(SecurityCheck::TOOL),
         ];
     }

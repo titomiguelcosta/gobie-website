@@ -111,24 +111,6 @@ class Client
         return $deleted;
     }
 
-    public function createJob(string $project, string $branch): array
-    {
-        $response = $this->httpClient->request(
-            Request::METHOD_POST,
-            '/jobs',
-            [
-                'headers' => $this->getHeaders(),
-                'json' => [
-                    'project' => $project,
-                    'branch' => $branch,
-                ],
-                'auth_bearer' => $this->getAuthBearer(),
-            ]
-        );
-
-        return $response->toArray();
-    }
-
     public function getJobs(): array
     {
         $response = $this->httpClient->request(
@@ -150,6 +132,24 @@ class Client
             sprintf('/jobs/%d', $id),
             [
                 'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        return $response->toArray();
+    }
+
+    public function createJob(string $project, string $branch): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_POST,
+            '/jobs',
+            [
+                'headers' => $this->getHeaders(),
+                'json' => [
+                    'project' => $project,
+                    'branch' => $branch,
+                ],
                 'auth_bearer' => $this->getAuthBearer(),
             ]
         );

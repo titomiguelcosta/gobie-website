@@ -24,7 +24,6 @@ class HomepageController extends AbstractController
         }
 
         $form = $this->createForm(EarlyAccessType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
