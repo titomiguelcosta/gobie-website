@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Entity\Task;
 
-class Phpstan extends Task
+class PhpInsights extends Task
 {
     public const TOOL = 'phpinsights';
 
