@@ -7,8 +7,8 @@ require 'recipe/symfony4.php';
 set('application', 'groomingchimps:web');
 set('repository', 'git@bitbucket.org:groomingchimps/web.git');
 set('git_tty', false);
-set('keep_releases', 3);
-set('shared_dirs', ['var/log', 'var/sessions', 'vendor', 'node_modules']);
+set('keep_releases', 2);
+set('shared_dirs', ['var/log', 'var/sessions', 'vendor']);
 set('writable_dirs', ['var']);
 set('composer_action', 'install');
 set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest');
@@ -23,8 +23,9 @@ host('groomingchimps.titomiguelcosta.com')
     ->set('branch', 'master')
     ->set('env', ['APP_ENV' => 'prod']);
 
-task('yarn:install', function() {
-    run('cd {{release_path}} && npm install && yarn encore production');
+task('yarn:install', function () {
+    run('cd {{release_path}} && npm install --loglevel=error');
+    run('cd {{release_path}} && yarn encore production');
 });
 
 before('deploy:symlink', 'yarn:install');
