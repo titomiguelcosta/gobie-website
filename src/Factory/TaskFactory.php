@@ -9,6 +9,7 @@ use App\Model\LintYaml;
 use App\Model\Phpmd;
 use App\Model\Phpstan;
 use App\Model\SecurityCheck;
+use App\Model\PhpInsights;
 use RuntimeException;
 
 class TaskFactory
@@ -20,6 +21,7 @@ class TaskFactory
         Phpmd::TOOL => Phpmd::class,
         Phpstan::TOOL => Phpstan::class,
         SecurityCheck::TOOL => SecurityCheck::class,
+        PhpInsights::TOOL => PhpInsights::class,
     ];
 
     private $tasks = [
@@ -29,6 +31,7 @@ class TaskFactory
         Phpmd::TOOL => null,
         Phpstan::TOOL => null,
         SecurityCheck::TOOL => null,
+        PhpInsights::TOOL => null,
     ];
 
     /**
@@ -43,6 +46,7 @@ class TaskFactory
             $this->createTask(Phpmd::TOOL),
             $this->createTask(Phpstan::TOOL),
             $this->createTask(SecurityCheck::TOOL),
+            $this->createTask(PhpInsights::TOOL),
         ];
     }
 
