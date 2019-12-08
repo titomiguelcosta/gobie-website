@@ -26,7 +26,9 @@ host('groomingchimps.titomiguelcosta.com')
 task('yarn:install', function () {
     run('cd {{release_path}} && npm install --loglevel=error');
     run('cd {{release_path}} && yarn encore production');
-});
+}, [
+    'timeout' => 3600
+]);
 
 before('deploy:symlink', 'yarn:install');
 

@@ -106,8 +106,8 @@
 <script>
 {% for task in job.tasks %}
     try {
-        var outputWrapper{{ tast.id }} = document.getElementById("output{{ task.id }}");
-        var output{{ tast.id }} = JSON.parse("{{ task.output }}");
+        var outputWrapper{{ task.id }} = document.getElementById("output{{ task.id }}");
+        var output{{ task.id }} = JSON.parse("{{ task.output }}");
         jsonTree.create(output{{ tast.id }}, outputWrapper{{ tast.id }});
     } catch (e) {
         console.log(e);
