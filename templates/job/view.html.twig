@@ -107,17 +107,15 @@
     $(function() {
         {% for task in job.tasks %}
             try {
-                var outputWrapper{{ task.id }} = document.getElementById("output{{ task.id }}");
                 var output{{ task.id }} = JSON.parse('{{ task.output|raw }}');
-                jsonTree.create(output{{ task.id }}, outputWrapper{{ task.id }});
+                $('output{{ task.id }}').jsonViewer(output{{ task.id }});
             } catch (e) {
                 console.log(e);
             }
 
             try {
-                var errorsWrapper{{ task.id }} = document.getElementById("errors{{ task.id }}");
                 var errors{{ task.id }} = JSON.parse('{{ task.errorOutput|raw }}');
-                jsonTree.create(errors{{ task.id }}, errorsWrapper{{ task.id }});
+                $('errors{{ task.id }}').jsonViewer(errors{{ task.id }});
             } catch (e) {
                 console.log(e);
             }
