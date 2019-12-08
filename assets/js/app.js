@@ -18,6 +18,6 @@ global.$ = global.jQuery = $;
 
 require('bootstrap');
 require('chart.js/dist/Chart.bundle');
-require('jsonTree.js');
+require('./jsonTree.js');
 
 console.log('Hello from Grooming Chimps!');
