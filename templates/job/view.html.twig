@@ -104,22 +104,24 @@
 </script>
 
 <script>
-{% for task in job.tasks %}
-    try {
-        var outputWrapper{{ task.id }} = document.getElementById("output{{ task.id }}");
-        var output{{ task.id }} = JSON.parse("{{ task.output }}");
-        jsonTree.create(output{{ task.id }}, outputWrapper{{ task.id }});
-    } catch (e) {
-        console.log(e);
-    }
+    $(function() {
+        {% for task in job.tasks %}
+            try {
+                var outputWrapper{{ task.id }} = document.getElementById("output{{ task.id }}");
+                var output{{ task.id }} = JSON.parse('{{ task.output|raw }}');
+                jsonTree.create(output{{ task.id }}, outputWrapper{{ task.id }});
+            } catch (e) {
+                console.log(e);
+            }
 
-    try {
-        var errorsWrapper{{ task.id }} = document.getElementById("errors{{ task.id }}");
-        var errors{{ task.id }} = JSON.parse("{{ task.errorOutput }}");
-        jsonTree.create(errors{{ task.id }}, errorsWrapper{{ task.id }});
-    } catch (e) {
-        console.log(e);
-    }
-{% endfor %}
+            try {
+                var errorsWrapper{{ task.id }} = document.getElementById("errors{{ task.id }}");
+                var errors{{ task.id }} = JSON.parse('{{ task.errorOutput|raw }}');
+                jsonTree.create(errors{{ task.id }}, errorsWrapper{{ task.id }});
+            } catch (e) {
+                console.log(e);
+            }
+        {% endfor %}
+    });
 <script>
 {% endblock %}
