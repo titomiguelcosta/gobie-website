@@ -47,14 +47,14 @@
 
             {% if task.output %}
                 <h3>Output</h3>
-                <code>{{ task.output }}</code>
+                <code id="output{{ task.id }}">{{ task.output }}</code>
 
                 <hr>
             {% endif %}
 
             {% if task.errorOutput %}
                 <h3>Errors</h3>
-                <code>{{ task.errorOutput }}</code>
+                <code id="errors{{ task.id }}">{{ task.errorOutput }}</code>
             {% endif %}
         </div>
     {% endfor %}
@@ -102,4 +102,24 @@
         });
     });
 </script>
+
+<script>
+{% for task in job.tasks %}
+    try {
+        var wrapper = document.getElementById("output{{ task.id }}");
+        var output = JSON.parse("{{ task.output }}");
+        jsonTree.create(data, wrapper);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        var wrapper = document.getElementById("errors{{ task.id }}");
+        var errors = JSON.parse("{{ task.errorOutput }}");
+        jsonTree.create(data, wrapper);
+    } catch (e) {
+        console.log(e);
+    }
+{% endfor }
+<script>
 {% endblock %}
