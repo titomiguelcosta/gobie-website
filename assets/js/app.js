@@ -8,6 +8,7 @@
 // any CSS you require will output into a single css file (app.css in this case)
 require('octicons');
 require('../css/app.css');
+require('jquery.json-viewer/json-viewer/jquery.json-viewer.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
@@ -17,6 +18,6 @@ global.$ = global.jQuery = $;
 
 require('bootstrap');
 require('chart.js/dist/Chart.bundle');
-require('jquery.json-viewer');
+require('jquery.json-viewer/json-viewer/jquery.json-viewer');
 
 console.log('Hello from Grooming Chimps!');
