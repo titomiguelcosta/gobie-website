@@ -10,6 +10,7 @@ use App\Model\Phpmd;
 use App\Model\Phpstan;
 use App\Model\SecurityCheck;
 use App\Model\PhpInsights;
+use App\Model\Psalm;
 use RuntimeException;
 
 class TaskFactory
@@ -22,6 +23,7 @@ class TaskFactory
         Phpstan::TOOL => Phpstan::class,
         SecurityCheck::TOOL => SecurityCheck::class,
         PhpInsights::TOOL => PhpInsights::class,
+        Psalm::TOOL => Psalm::class,
     ];
 
     private $tasks = [
@@ -32,6 +34,7 @@ class TaskFactory
         Phpstan::TOOL => null,
         SecurityCheck::TOOL => null,
         PhpInsights::TOOL => null,
+        Psalm::TOOL => null,
     ];
 
     /**
@@ -47,6 +50,7 @@ class TaskFactory
             $this->createTask(Phpstan::TOOL),
             $this->createTask(SecurityCheck::TOOL),
             $this->createTask(PhpInsights::TOOL),
+            $this->createTask(Psalm::TOOL),
         ];
     }
 
