@@ -106,20 +106,20 @@
 <script>
 {% for task in job.tasks %}
     try {
-        var wrapper = document.getElementById("output{{ task.id }}");
-        var output = JSON.parse("{{ task.output }}");
-        jsonTree.create(data, wrapper);
+        var outputWrapper{{ tast.id }} = document.getElementById("output{{ task.id }}");
+        var output{{ tast.id }} = JSON.parse("{{ task.output }}");
+        jsonTree.create(output{{ tast.id }}, outputWrapper{{ tast.id }});
     } catch (e) {
         console.log(e);
     }
 
     try {
-        var wrapper = document.getElementById("errors{{ task.id }}");
-        var errors = JSON.parse("{{ task.errorOutput }}");
-        jsonTree.create(data, wrapper);
+        var errorsWrapper{{ task.id }} = document.getElementById("errors{{ task.id }}");
+        var errors{{ task.id }} = JSON.parse("{{ task.errorOutput }}");
+        jsonTree.create(errors{{ task.id }}, errorsWrapper{{ task.id }});
     } catch (e) {
         console.log(e);
     }
-{% endfor }
+{% endfor %}
 <script>
 {% endblock %}
