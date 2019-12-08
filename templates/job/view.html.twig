@@ -108,7 +108,7 @@
     try {
         var outputWrapper{{ task.id }} = document.getElementById("output{{ task.id }}");
         var output{{ task.id }} = JSON.parse("{{ task.output }}");
-        jsonTree.create(output{{ tast.id }}, outputWrapper{{ tast.id }});
+        jsonTree.create(output{{ task.id }}, outputWrapper{{ task.id }});
     } catch (e) {
         console.log(e);
     }
