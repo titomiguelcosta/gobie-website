@@ -139,7 +139,7 @@ class Client
         return $response->toArray();
     }
 
-    public function createJob(string $project, string $branch): array
+    public function createJob(string $project, string $branch, string $environment): array
     {
         $response = $this->httpClient->request(
             Request::METHOD_POST,
@@ -149,6 +149,7 @@ class Client
                 'json' => [
                     'project' => $project,
                     'branch' => $branch,
+                    'environment' => $environment,
                 ],
                 'auth_bearer' => $this->getAuthBearer(),
             ]

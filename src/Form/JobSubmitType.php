@@ -36,6 +36,12 @@ class JobSubmitType extends AbstractType
                 'empty_data' => 'https://',
             ])
             ->add('branch', TextType::class)
+            ->add('environment', ChoiceType::class, [
+                'choices' => [
+                    'PHP 7.3' => 'PHP73',
+                    'PHP 7.4' => 'PHP74',
+                ]
+            ])
             ->add('tasks', ChoiceType::class, [
                 'choice_label' => function (Task $task) {
                     return $task->getLabel();

@@ -24,6 +24,12 @@ class JobSubmit
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $environment;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Url(protocols={"https"}, message="Only the https protocol is accepted.")
@@ -65,6 +71,18 @@ class JobSubmit
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getEnvironment(): ?string
+    {
+        return $this->environment;
+    }
+
+    public function setEnvironment(string $env): self
+    {
+        $this->environment = $env;
 
         return $this;
     }

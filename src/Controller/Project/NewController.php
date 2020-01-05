@@ -19,7 +19,10 @@ class NewController extends AbstractController
      * @Route("/projects/new", name="project_new")
      */
     public function __invoke(
-        Request $request, Security $security, GroomingChimpsApiClient $client, TaskFactory $taskFactory
+        Request $request,
+        Security $security,
+        GroomingChimpsApiClient $client,
+        TaskFactory $taskFactory
     ) {
         $jobSubmit = new JobSubmit();
         $jobSubmit->setBranch('master');
@@ -32,7 +35,7 @@ class NewController extends AbstractController
             /** @var $jobSubmit JobSubmit */
             $jobSubmit = $form->getData();
             $project = $client->createProject($jobSubmit->getRepo(), $jobSubmit->getDescription(), $jobSubmit->isPrivate());
-            $job = $client->createJob($project['@id'], $jobSubmit->getBranch());
+            $job = $client->createJob($project['@id'], $jobSubmit->getBranch(), $jobSubmit->getEnvironment());
             $client->createTasks($job['@id'], $jobSubmit->getTasks());
 
             $this->addFlash('repo', $jobSubmit->getRepo());
