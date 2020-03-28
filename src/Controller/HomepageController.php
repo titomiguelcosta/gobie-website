@@ -5,15 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EarlyAccessType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 class HomepageController extends AbstractController
 {
-    use ControllerTrait;
-
     /**
      * @Route("/", name="homepage")
      */
