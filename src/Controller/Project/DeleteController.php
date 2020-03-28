@@ -4,14 +4,11 @@ namespace App\Controller\Project;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
-use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DeleteController extends AbstractController
 {
-    use ControllerTrait;
-
     /**
      * @IsGranted("ROLE_USER")
      * @Route("/projects/{id}/delete", name="project_delete")
