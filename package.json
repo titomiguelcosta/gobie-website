@@ -1,8 +1,8 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.26.0",
-        "core-js": "^3.0.0",
-        "webpack-notifier": "^1.6.0"
+        "@symfony/webpack-encore": "^0.30.2",
+        "core-js": "^3.6.5",
+        "webpack-notifier": "^1.8.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -15,10 +15,10 @@
     "dependencies": {
         "bootstrap": "4.3.1",
         "chart.js": "^2.8.0",
-        "jquery": "^3.3.1",
+        "jquery": "^3.5.1",
         "jquery.json-viewer": "^1.4.0",
-        "npm": "^6.13.1",
+        "npm": "^6.14.5",
         "octicons": "4.4.0",
-        "popper.js": "^1.14.7"
+        "popper.js": "^1.16.1"
     }
 }
