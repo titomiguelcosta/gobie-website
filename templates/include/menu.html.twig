@@ -4,6 +4,11 @@
         <span class="nav-item">
             <a class="nav-link{% if menu == 'projects' %} active{% endif %}" href="{{ url('project_list') }}">Projects</a>
         </span>
+        {% if app.user.hasRole('ROLE_ADMIN') %}
+        <span class="nav-item">
+            <a class="nav-link" target="_blank" href="{{ grooming_chimps_api_base_url }}/admin">Admin</a>
+        </span>
+        {% endif %}
         <span class="nav-item">
             <a class="nav-link" href="{{ url('app_logout') }}">Logout</a>
         </span>
