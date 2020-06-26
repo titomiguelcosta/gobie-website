@@ -1,20 +1,6 @@
 version: "3.1"
 services:
-    mysql:
-      image: mysql:5.7
-      container_name: grooming-chimps-web-mysql
-      working_dir: /application
-      volumes:
-        - ..:/application
-      environment:
-        - MYSQL_ROOT_PASSWORD=galinha
-        - MYSQL_DATABASE=groomingchimpsweb
-        - MYSQL_USER=web
-        - MYSQL_PASSWORD=galinha
-      ports:
-        - "8092:3306"
-
-    webserver:
+    grooming-chimps-web-webserver:
       image: nginx:alpine
       container_name: grooming-chimps-web-webserver
       working_dir: /application
@@ -22,16 +8,14 @@ services:
         - ..:/application
         - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       ports:
-        - "8090:80"
+        - "8091:80"
       depends_on:
-        - php-fpm
+        - grooming-chimps-web-php-fpm
 
-    php-fpm:
+    grooming-chimps-web-php-fpm:
       build: php-fpm
       container_name: grooming-chimps-web-php-fpm
       working_dir: /application
       volumes:
         - ..:/application
         - ./php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
-      depends_on:
-        - mysql
