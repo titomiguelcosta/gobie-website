@@ -19,5 +19,6 @@ global.$ = global.jQuery = $;
 require('bootstrap');
 require('chart.js/dist/Chart.bundle');
 require('jquery.json-viewer/json-viewer/jquery.json-viewer');
+require('pusher/lib/pusher');
 
 console.log('Hello from Grooming Chimps!');
