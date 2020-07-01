@@ -6,7 +6,7 @@ use App\Factory\TaskFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RerunController extends AbstractController
