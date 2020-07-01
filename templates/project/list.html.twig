@@ -43,7 +43,7 @@
 
                         <div class="col-3 btn-group mx-0 px-2" role="group" aria-label="job actions">
                             <a href="{{ path('job_view', {'id': job.id}) }}" role="button" class="btn btn-secondary btn-sm">Details</a>
-                            <a href="#" role="button" class="btn btn-secondary btn-sm">Re-Submit</a>
+                            <a href="{{ path('job_rerun', {'id': job.id, 'token': job.token}) }}" role="button" class="btn btn-secondary btn-sm">Rerun</a>
                             <a href="{{ path('job_delete', {'id': job.id}) }}" role="button" class="btn btn-danger btn-sm">Delete</a>
                         </div>
 

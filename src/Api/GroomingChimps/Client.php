@@ -158,6 +158,20 @@ class Client
         return $response->toArray();
     }
 
+    public function rerunJob(string $jobId, string $jobToken): array
+    {
+        $response = $this->httpClient->request(
+            Request::METHOD_POST,
+            sprintf('/jobs/%d/rerun?token=%s', $jobId, $jobToken),
+            [
+                'headers' => $this->getHeaders(),
+                'auth_bearer' => $this->getAuthBearer(),
+            ]
+        );
+
+        return $response->toArray();
+    }
+
     public function deleteJob(int $id): bool
     {
         $response = $this->httpClient->request(
