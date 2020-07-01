@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ViewController extends AbstractController
+class RerunController extends AbstractController
 {
     /**
      * @IsGranted("ROLE_USER")
