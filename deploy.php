@@ -30,6 +30,6 @@ task('yarn:install', function () {
     'timeout' => 3600
 ]);
 
-before('deploy:symlink', 'yarn:install');
+after('deploy:update_code', 'yarn:install');
 
 after('deploy:failed', 'deploy:unlock');

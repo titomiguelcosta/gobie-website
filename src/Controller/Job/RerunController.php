@@ -21,6 +21,6 @@ class RerunController extends AbstractController
 
         $this->addFlash('success', 'Job was queued to rerun.');
 
-        return $this->redirectToRoute('job_view', ['id' => $job['@id']]);
+        return $this->redirectToRoute('job_view', ['id' => $job['id']]);
     }
 }
