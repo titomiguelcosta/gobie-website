@@ -17,10 +17,10 @@ class RerunController extends AbstractController
      */
     public function __invoke($id, Request $request, GroomingChimpsApiClient $client, TaskFactory $factory)
     {
-        $client->rerunJob($id, $request->query->get('token', ''));
+        $job = $client->rerunJob($id, $request->query->get('token', ''));
 
         $this->addFlash('success', 'Job was queued to rerun.');
 
-        return $this->redirectToRoute('job_view', ['id' => $id]);
+        return $this->redirectToRoute('job_view', ['id' => $job['@id']]);
     }
 }

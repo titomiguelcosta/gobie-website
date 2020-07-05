@@ -160,7 +160,7 @@ class Client
 
     public function rerunJob(string $jobId, string $jobToken): array
     {
-        $this->httpClient->request(
+        $response = $this->httpClient->request(
             Request::METHOD_POST,
             sprintf('/jobs/%d/rerun?token=%s', $jobId, $jobToken),
             [
@@ -169,7 +169,7 @@ class Client
             ]
         );
 
-        return [];
+        return $response->toArray();
     }
 
     public function deleteJob(int $id): bool
