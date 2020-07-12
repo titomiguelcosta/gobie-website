@@ -8,7 +8,7 @@ set('application', 'groomingchimps:web');
 set('repository', 'git@bitbucket.org:groomingchimps/web.git');
 set('git_tty', false);
 set('keep_releases', 2);
-set('shared_dirs', ['var/log', 'var/sessions', 'vendor']);
+set('shared_dirs', ['var/log', 'var/cache', 'var/sessions', 'vendor']);
 set('writable_dirs', ['var']);
 set('composer_action', 'install');
 set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest');
