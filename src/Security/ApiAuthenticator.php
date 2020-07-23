@@ -92,7 +92,8 @@ class ApiAuthenticator extends AbstractFormLoginAuthenticator
 
         /** @var User $user */
         $user = new User();
-        $user->setId($data['@id']);
+        $user->setId($data['id']);
+        $user->setPath($data['@id']);
         $user->setRoles($data['roles']);
         $user->setToken($data['token']);
         $user->setEmail($data['email']);

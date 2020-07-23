@@ -39,11 +39,12 @@ class UserProvider implements UserProviderInterface
         }
 
         $user = new User();
+        $user->setId($data['id']);
+        $user->setPath($data['@id']);
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
         $user->setRoles($data['roles']);
-        $user->setId($data['@id']);
 
         return $user;
     }

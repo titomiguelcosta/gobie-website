@@ -71,6 +71,7 @@ class Client
 
     public function createProject(string $repo, string $description, bool $isPrivate = false): array
     {
+        /** @var User $user */
         $user = $this->security->getUser();
         $response = $this->httpClient->request(
             Request::METHOD_POST,
@@ -81,7 +82,7 @@ class Client
                     'repo' => $repo,
                     'isPrivate' => $isPrivate,
                     'description' => $description,
-                    'createdBy' => $user->getId(),
+                    'createdBy' => $user->getPath(),
                 ],
                 'auth_bearer' => $this->getAuthBearer(),
             ]

@@ -7,15 +7,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     private $id;
-
+    private $path;
     private $username;
-
     private $email;
-
     private $password;
-
     private $roles;
-
     private $token;
 
     public function getId(): string
@@ -26,6 +22,18 @@ class User implements UserInterface
     public function setId(string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): self
+    {
+        $this->path = $path;
 
         return $this;
     }

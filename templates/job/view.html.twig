@@ -122,8 +122,8 @@
             }
         {% endfor %}
 
-        var channel = gobie.pusher.subscribe('gobie.job.{{ job.id }}');
-        channel.bind('finished', function(data) {
+        var channelJob = gobie.pusher.subscribe('gobie.job.{{ job.id }}');
+        channelJob.bind('finished', function(data) {
             alert('Job finished.');
         });
     });
