@@ -37,8 +37,22 @@
         </footer>
 
         {{ encore_entry_script_tags('app') }}
-        {% block javascripts %}
-            
-        {% endblock %}
+
+        <script type="text/javascript">
+        //<![CDATA[
+            gobie.pusher = new Pusher('{{ pusher_token }}', {
+                cluster: '{{ pusher_cluster }}'
+            });
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                var channelEventUser = gobie.pusher.subscribe('gobie.event.user.{{ app.user.id }}');
+                channelEventUser.bind('created', function(data) {
+                    alert('Event was created: ' + data);
+                });
+            {% endif %}
+        //]]>
+        </script>
+
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

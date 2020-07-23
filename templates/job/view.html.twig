@@ -122,13 +122,9 @@
             }
         {% endfor %}
 
-        var pusher = new Pusher('{{ pusher_token }}', {
-            cluster: '{{ pusher_cluster }}'
-        });
-
-        var channel = pusher.subscribe('job-{{ job.id }}');
+        var channel = gobie.pusher.subscribe('gobie.job.{{ job.id }}');
         channel.bind('finished', function(data) {
-            alert('Project finished.');
+            alert('Job finished.');
         });
     });
 //]]>

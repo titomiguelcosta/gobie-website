@@ -84,3 +84,23 @@
         <a href="{{ path('project_new') }}" role="button" class="btn btn-primary">New</a>
     </div>
 {% endblock %}
+
+
+{%block javascripts %}
+<script type="text/javascript">
+//<![CDATA[
+    $(function() {
+        {% if project.jobs | length > 0 %}
+            {% for job in project.jobs %}
+                var channel{{ job.id }} = gobie.pusher.subscribe('gobie.job.{{ job.id }}');
+                channel{{ job.id }}.bind('started', function(data) {
+                    alert('Job started.');
+                });
+                channel{{ job.id }}.bind('finished', function(data) {
+                    alert('Job finished.');
+                });
+            {% endfor %}
+        {% endif %}
+    });
+//]]>
+</script>

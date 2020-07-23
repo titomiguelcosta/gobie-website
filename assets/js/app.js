@@ -15,6 +15,7 @@ require('jquery.json-viewer/json-viewer/jquery.json-viewer.css');
 
 const $ = require('jquery');
 global.$ = global.jQuery = $;
+global.gobie = {};
 
 require('bootstrap');
 require('chart.js/dist/Chart.bundle');
