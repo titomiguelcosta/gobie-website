@@ -102,6 +102,9 @@
             ".php_cs.dist"
         ]
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -115,7 +118,7 @@
         "version": "2.1.1"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -285,9 +288,6 @@
         "version": "v4.2.4"
     },
     "symfony/http-kernel": {
-        "version": "v4.2.4"
-    },
-    "symfony/inflector": {
         "version": "v4.2.4"
     },
     "symfony/intl": {
@@ -553,6 +553,9 @@
     },
     "twig/twig": {
         "version": "v2.7.4"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.4.0"
