@@ -11,6 +11,7 @@ use App\Model\Phpstan;
 use App\Model\SecurityCheck;
 use App\Model\PhpInsights;
 use App\Model\Psalm;
+use App\Model\Phploc;
 use RuntimeException;
 
 class TaskFactory
@@ -21,6 +22,7 @@ class TaskFactory
         LintXliff::TOOL => LintXliff::class,
         Phpmd::TOOL => Phpmd::class,
         Phpstan::TOOL => Phpstan::class,
+        Phploc::TOOL => Phploc::class,
         SecurityCheck::TOOL => SecurityCheck::class,
         PhpInsights::TOOL => PhpInsights::class,
         Psalm::TOOL => Psalm::class,
@@ -32,6 +34,7 @@ class TaskFactory
         LintYaml::TOOL => null,
         Phpmd::TOOL => null,
         Phpstan::TOOL => null,
+        Phploc::TOOL => null,
         SecurityCheck::TOOL => null,
         PhpInsights::TOOL => null,
         Psalm::TOOL => null,
@@ -51,6 +54,7 @@ class TaskFactory
             $this->createTask(SecurityCheck::TOOL),
             $this->createTask(PhpInsights::TOOL),
             $this->createTask(Psalm::TOOL),
+            $this->createTask(Phploc::TOOL),
         ];
     }
 

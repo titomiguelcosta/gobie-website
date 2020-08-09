@@ -11,17 +11,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Security\Core\Security;
 use App\Entity\Task;
 
 class JobSubmitType extends AbstractType
 {
-    private $security;
     private $taskFactory;
 
-    public function __construct(Security $security, TaskFactory $taskFactory)
+    public function __construct(TaskFactory $taskFactory)
     {
-        $this->security = $security;
         $this->taskFactory = $taskFactory;
     }
 
