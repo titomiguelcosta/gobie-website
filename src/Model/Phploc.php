@@ -23,7 +23,7 @@ class Phploc extends Task
 
     public function getCommand(): string
     {
-        return 'phploc --log-json=/dev/stdout -nq src';
+        return 'phploc --log-json=/dev/stdout -q src';
     }
 
     public function getGroup(): string
