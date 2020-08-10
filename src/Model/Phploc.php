@@ -28,6 +28,6 @@ class Phploc extends Task
 
     public function getGroup(): string
     {
-        return 'Analysers';
+        return 'Metrics';
     }
 }
