@@ -62,8 +62,8 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 
+    .enableReactPreset()
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
     ;
 

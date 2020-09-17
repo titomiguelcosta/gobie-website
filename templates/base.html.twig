@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Grooming Chimps {% block title %}{% endblock %}</title>
+        <title>Gobie {% block title %}{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -12,10 +12,10 @@
         <div class="container py-2">
             {% block header %}
                 <h1 class="display-4">
-                    <a href="{{ path("homepage") }}">Grooming Chimps</a>
+                    <a href="{{ path("homepage") }}">Gobie</a>
                 </h1>
                 <div class="clearfix">
-                    <p class="lead float-left text-muted">Source code analysis</p>
+                    <div id="motto"></div>
 
                     {% include 'include/menu.html.twig' %}
                 </div>

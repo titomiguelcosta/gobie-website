@@ -21,5 +21,7 @@ require('bootstrap');
 require('chart.js/dist/Chart.bundle');
 require('jquery.json-viewer/json-viewer/jquery.json-viewer');
 require('./pusher.min.js');
+require('react');
+require('./components/motto');
 
-console.log('Hello from Grooming Chimps!');
+console.log('Hello from Gobie!');
