@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class Motto extends React.Component {
     render() {
         return (
-            <p class="lead float-left text-muted">Source code analysis</p>
+            <p className="lead float-left text-muted">Source code analysis</p>
         );
     }
 }
