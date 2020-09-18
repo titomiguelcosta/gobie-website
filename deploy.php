@@ -13,7 +13,7 @@ set('writable_dirs', ['var/log', 'var/cache', 'var/sessions']);
 set('composer_action', 'install');
 set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest');
 
-host('groomingchimps.titomiguelcosta.com')
+host('gobie.titomiguelcosta.com')
     ->user('ubuntu')
     ->stage('prod')
     ->set('deploy_path', '/mnt/websites/groomingchimps/web')
@@ -30,6 +30,6 @@ task('yarn:install', function () {
     'timeout' => 3600
 ]);
 
-after('deploy:update_code', 'yarn:install');
+after('deploy:shared', 'yarn:install');
 
 after('deploy:failed', 'deploy:unlock');
