@@ -3,16 +3,24 @@
 {% block title %}Authentication{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    <div id="auth"></div>
+{% endblock %}
 
-        {{ form_row(form.username) }}
-        {{ form_row(form.password) }}
-
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        {{ form_row(form.save) }}
-    {{ form_end(form) }}
+{% block javascripts %}
+    <script type="text/javascript">
+    //<![CDATA[
+        $(function() {
+            ReactDOM.render(
+                React.createElement(
+                    Auth,
+                    {
+                        csrfToken: "{{ csrf_token('authenticate') }}",
+                        formToken: "{{ csrf_token('login_form') }}"
+                    }
+                ),
+                document.getElementById('auth')
+            );
+        });
+    //]]>
+    </script>
 {% endblock %}

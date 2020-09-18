@@ -9,4 +9,6 @@ class Motto extends React.Component {
     }
 }
 
-ReactDOM.render(<Motto />, document.getElementById('motto'));
+if (document.getElementById('motto')) {
+    ReactDOM.render(<Motto />, document.getElementById('motto'));
+}

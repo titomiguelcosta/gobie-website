@@ -21,7 +21,10 @@ require('bootstrap');
 require('chart.js/dist/Chart.bundle');
 require('jquery.json-viewer/json-viewer/jquery.json-viewer');
 require('./pusher.min.js');
-require('react');
+global.React = require('react');
+global.ReactDOM = require('react-dom');
 require('./components/motto');
+import Auth from './components/auth';
+global.Auth = Auth;
 
 console.log('Hello from Gobie!');

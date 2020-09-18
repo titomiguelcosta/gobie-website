@@ -16,7 +16,8 @@
     "dependencies": {
         "bootstrap": "4.3.1",
         "chart.js": "^2.8.0",
-        "fs": "0.0.1-security",
+        "dotenv": "^8.2.0",
+        "fs": "^0.0.1-security",
         "jquery": "^3.5.1",
         "jquery.json-viewer": "^1.4.0",
         "net": "^1.0.2",

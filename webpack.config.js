@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+var dotenv = require('dotenv');
 
 Encore
     // directory where compiled assets will be stored
@@ -65,6 +66,16 @@ Encore
     .enableReactPreset()
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.addEntry('admin', './assets/js/admin.js')
+
+    .configureDefinePlugin(options => {
+        const env = dotenv.config({ path: './.env.local' });
+
+        if (env.error) {
+            throw env.error;
+        }
+
+        options['process.env'].GROOMING_CHIMPS_API_BASE_URI = JSON.stringify(env.parsed.GROOMING_CHIMPS_API_BASE_URI);
+    })
     ;
 
 module.exports = Encore.getWebpackConfig();

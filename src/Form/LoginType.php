@@ -24,6 +24,7 @@ class LoginType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'login_form',
         ]);
     }
 }
