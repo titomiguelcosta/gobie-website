@@ -8,6 +8,7 @@ export default class Auth extends React.Component {
             username: '',
             password: '',
             errors: false,
+            loading: false,
         }
     }
 
@@ -15,6 +16,13 @@ export default class Auth extends React.Component {
         const errors = this.state.errors
             ? <div className="alert alert-danger">Token invalid. Bad credentials.</div>
             : null;
+
+        const button = this.state.loading
+            ? <button className="btn btn-primary" type="button" disabled>
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span className="sr-only">Authenticating...</span>
+            </button>
+            : <button onClick={(e) => this.handleSubmit(e)} type="submit" id="save" name="save" className="btn-primary btn">Authenticate</button>;
 
         return (
             <form method="post" id="authForm">
@@ -33,7 +41,7 @@ export default class Auth extends React.Component {
                 <input type="hidden" name="_token" value={this.props.formToken} />
 
                 <div className="form-group">
-                    <button onClick={(e) => this.handleSubmit(e)} type="submit" id="save" name="save" className="btn-primary btn">Authenticate</button>
+                    {button}
                 </div>
             </form>
         );
@@ -49,13 +57,14 @@ export default class Auth extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        this.setState({ loading: true });
         const gobie = new GobieApi();
 
         gobie
             .auth(this.state.username, this.state.password)
             .then(() => {
                 if (gobie.errors) {
-                    this.setState({ errors: true });
+                    this.setState({ errors: true, loading: false });
                 } else {
                     gobie.setUser(gobie.data);
                     document.getElementById('authForm').submit();
