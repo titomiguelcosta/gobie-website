@@ -20,7 +20,7 @@ export default class Auth extends React.Component {
         const button = this.state.loading
             ? <button className="btn btn-primary" type="button" disabled>
                 <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span className="sr-only">Authenticating...</span>
+                Authenticating...
             </button>
             : <button onClick={(e) => this.handleSubmit(e)} type="submit" id="save" name="save" className="btn-primary btn">Authenticate</button>;
 
