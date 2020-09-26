@@ -6,12 +6,12 @@ use App\Entity\Task;
 use App\Model\LintTwig;
 use App\Model\LintXliff;
 use App\Model\LintYaml;
+use App\Model\PhpInsights;
+use App\Model\Phploc;
 use App\Model\Phpmd;
 use App\Model\Phpstan;
-use App\Model\SecurityCheck;
-use App\Model\PhpInsights;
 use App\Model\Psalm;
-use App\Model\Phploc;
+use App\Model\SecurityCheck;
 use RuntimeException;
 
 class TaskFactory
@@ -40,9 +40,6 @@ class TaskFactory
         Psalm::TOOL => null,
     ];
 
-    /**
-     * @return array
-     */
     public function getTasks(): array
     {
         return [
@@ -58,10 +55,6 @@ class TaskFactory
         ];
     }
 
-    /**
-     * @param string $tool
-     * @return Task
-     */
     public function createTask(string $tool): Task
     {
         if (!array_key_exists($tool, $this->tasks)) {

@@ -44,7 +44,7 @@ class HomepageController extends AbstractController
 
         return $this->render('homepage.html.twig', [
             'menu' => 'homepage',
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

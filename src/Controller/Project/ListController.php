@@ -2,11 +2,11 @@
 
 namespace App\Controller\Project;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ListController extends AbstractController
 {
@@ -21,7 +21,7 @@ class ListController extends AbstractController
         return $this->render('project/list.html.twig', [
             'projects' => $data['hydra:member'],
             'pagination' => $data['hydra:view'] ?? false,
-            'menu' => 'projects'
+            'menu' => 'projects',
         ]);
     }
 }

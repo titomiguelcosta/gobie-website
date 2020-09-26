@@ -12,7 +12,7 @@ class Phploc extends Task
     {
         parent::__construct(self::TOOL, 'phploc');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 

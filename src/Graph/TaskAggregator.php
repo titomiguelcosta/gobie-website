@@ -2,8 +2,8 @@
 
 namespace App\Graph;
 
-use App\Factory\TaskFactory;
 use App\Entity\Task;
+use App\Factory\TaskFactory;
 
 class TaskAggregator
 {

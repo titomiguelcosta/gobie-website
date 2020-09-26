@@ -12,7 +12,7 @@ class PhpInsights extends Task
     {
         parent::__construct(self::TOOL, 'phpinsights');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 

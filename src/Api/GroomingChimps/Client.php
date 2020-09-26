@@ -2,13 +2,13 @@
 
 namespace App\Api\GroomingChimps;
 
+use App\Entity\Task;
+use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
-use App\Entity\User;
-use App\Entity\Task;
 
 class Client
 {
@@ -61,8 +61,8 @@ class Client
                 'headers' => $this->getHeaders(),
                 'auth_bearer' => $this->getAuthBearer(),
                 'query' => [
-                    'p' => $page
-                ]
+                    'p' => $page,
+                ],
             ]
         );
 

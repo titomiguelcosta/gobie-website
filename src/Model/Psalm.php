@@ -12,7 +12,7 @@ class Psalm extends Task
     {
         parent::__construct(self::TOOL, 'psalm');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 

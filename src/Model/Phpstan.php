@@ -12,7 +12,7 @@ class Phpstan extends Task
     {
         parent::__construct(self::TOOL, 'phpstan');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 

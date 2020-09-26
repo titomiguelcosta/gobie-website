@@ -2,13 +2,13 @@
 
 namespace App\Security;
 
+use App\Api\GroomingChimps\Client;
+use App\Entity\User;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use App\Api\GroomingChimps\Client;
-use App\Entity\User;
-use Symfony\Component\HttpClient\Exception\ClientException;
 
 class UserProvider implements UserProviderInterface
 {

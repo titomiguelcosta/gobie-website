@@ -9,5 +9,8 @@ docker-purge-images:
 docker-run:
 	docker-compose -f docker/docker-compose.dev.yml up
 
+php-fix:
+	php vendor/bin/php-cs-fixer fix src/
+
 deploy:
 	php bin/dep deploy prod

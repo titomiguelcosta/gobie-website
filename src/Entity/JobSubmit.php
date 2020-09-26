@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobSubmitRepository")

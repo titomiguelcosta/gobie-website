@@ -3,15 +3,15 @@
 namespace App\Form;
 
 use App\Entity\JobSubmit;
+use App\Entity\Task;
 use App\Factory\TaskFactory;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Entity\Task;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JobSubmitType extends AbstractType
 {
@@ -38,7 +38,7 @@ class JobSubmitType extends AbstractType
                     'PHP 8.0' => 'PHP80',
                     'PHP 7.4' => 'PHP74',
                     'PHP 7.3' => 'PHP73',
-                ]
+                ],
             ])
             ->add('tasks', ChoiceType::class, [
                 'choice_label' => function (Task $task) {
@@ -53,7 +53,7 @@ class JobSubmitType extends AbstractType
                 'choices' => $this->taskFactory->getTasks(),
                 'multiple' => true,
                 'expanded' => true,
-                'required' => true
+                'required' => true,
             ])
             ->add('save', SubmitType::class, ['label' => 'Submit Job']);
     }

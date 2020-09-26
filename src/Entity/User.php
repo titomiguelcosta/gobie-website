@@ -47,7 +47,6 @@ class User implements UserInterface
     }
 
     /**
-     * @param array $roles
      * @return User
      */
     public function setRoles(array $roles): self
@@ -57,10 +56,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @param string $role
-     * @return bool
-     */
     public function hasRole(string $role): bool
     {
         return in_array($role, $this->roles);

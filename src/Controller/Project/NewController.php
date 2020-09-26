@@ -2,14 +2,14 @@
 
 namespace App\Controller\Project;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Factory\TaskFactory;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\JobSubmitType;
-use App\Entity\JobSubmit;
-use Symfony\Component\HttpFoundation\Request;
 use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
+use App\Entity\JobSubmit;
+use App\Factory\TaskFactory;
+use App\Form\JobSubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 class NewController extends AbstractController
@@ -44,7 +44,7 @@ class NewController extends AbstractController
         }
 
         return $this->render('project/new.html.twig', [
-            'form' => $form->createView(), 'menu' => 'homepage', 'taskFactory' => $taskFactory
+            'form' => $form->createView(), 'menu' => 'homepage', 'taskFactory' => $taskFactory,
         ]);
     }
 }

@@ -12,7 +12,7 @@ class Phpmd extends Task
     {
         parent::__construct(self::TOOL, 'phpmd');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 

@@ -12,7 +12,7 @@ class SecurityCheck extends Task
     {
         parent::__construct(self::TOOL, 'Security Check');
         $this->setOptions([
-            'cwd' => true
+            'cwd' => true,
         ]);
     }
 
