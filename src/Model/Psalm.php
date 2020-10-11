@@ -23,7 +23,7 @@ class Psalm extends Task
 
     public function getCommand(): string
     {
-        return 'psalm --init src 1 && psalm';
+        return 'psalm --no-progress --ignore-baseline -m --output-format=json';
     }
 
     public function getGroup(): string

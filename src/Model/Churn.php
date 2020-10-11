@@ -4,13 +4,13 @@ namespace App\Model;
 
 use App\Entity\Task;
 
-class PhpInsights extends Task
+class Churn extends Task
 {
-    public const TOOL = 'phpinsights';
+    public const TOOL = 'churn';
 
     public function __construct()
     {
-        parent::__construct(self::TOOL, 'phpinsights');
+        parent::__construct(self::TOOL, 'churn');
         $this->setOptions([
             'cwd' => true,
         ]);
@@ -18,12 +18,12 @@ class PhpInsights extends Task
 
     public function getDescription(): string
     {
-        return 'Instant PHP quality checks from your console';
+        return 'Detects files that are good candidates for refactoring.';
     }
 
     public function getCommand(): string
     {
-        return 'phpinsights analyse -n --format=json src';
+        return 'churn run src --format=json';
     }
 
     public function getGroup(): string

@@ -4,13 +4,13 @@ namespace App\Model;
 
 use App\Entity\Task;
 
-class PhpInsights extends Task
+class Phpcs extends Task
 {
-    public const TOOL = 'phpinsights';
+    public const TOOL = 'phpcs';
 
     public function __construct()
     {
-        parent::__construct(self::TOOL, 'phpinsights');
+        parent::__construct(self::TOOL, 'phpcs');
         $this->setOptions([
             'cwd' => true,
         ]);
@@ -18,12 +18,12 @@ class PhpInsights extends Task
 
     public function getDescription(): string
     {
-        return 'Instant PHP quality checks from your console';
+        return 'Detects violations of a defined coding standard.';
     }
 
     public function getCommand(): string
     {
-        return 'phpinsights analyse -n --format=json src';
+        return 'phpcs --report=json src/';
     }
 
     public function getGroup(): string
