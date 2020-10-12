@@ -110,13 +110,13 @@
     $(function() {
         {% for task in job.tasks %}
             try {
-                var output{{ task.id }} = JSON.parse(`{{ task.output|raw }}`.replace('\\', '\\\\'));
+                var output{{ task.id }} = JSON.parse(`{{ task.output|raw }}`.replace('\\g', '\\\\'));
                 $('#output{{ task.id }}').jsonViewer(output{{ task.id }}, {collapsed: true, withQuotes: true, withLinks: false});
             } catch (e) {
             }
 
             try {
-                var errors{{ task.id }} = JSON.parse(`{{ task.errorOutput|raw }}`.replace('\\', '\\\\'));
+                var errors{{ task.id }} = JSON.parse(`{{ task.errorOutput|raw }}`.replace('\\g', '\\\\'));
                 $('#errors{{ task.id }}').jsonViewer(errors{{ task.id }}, {collapsed: true, withQuotes: true, withLinks: false});
             } catch (e) {
             }
