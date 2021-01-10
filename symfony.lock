@@ -99,6 +99,9 @@
             ".php_cs.dist"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.2"
+    },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
@@ -110,9 +113,6 @@
     },
     "ocramius/package-versions": {
         "version": "1.4.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.1.1"
     },
     "php": {
         "version": "7.4"
@@ -374,6 +374,9 @@
     "symfony/property-info": {
         "version": "v4.2.4"
     },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.2.1"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -550,9 +553,6 @@
     },
     "twig/twig": {
         "version": "v2.7.4"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.4.0"

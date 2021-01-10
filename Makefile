@@ -13,4 +13,4 @@ php-fix:
 	php vendor/bin/php-cs-fixer fix src/
 
 deploy:
-	php bin/dep deploy prod
+	php bin/dep deploy dev

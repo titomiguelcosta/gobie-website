@@ -15,7 +15,7 @@ set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progre
 
 host('gobie.titomiguelcosta.com')
     ->user('ubuntu')
-    ->stage('prod')
+    ->stage('dev')
     ->set('deploy_path', '/mnt/websites/groomingchimps/web')
     ->set('shared_files', ['.env.local'])
     ->set('http_user', 'ubuntu')
@@ -24,7 +24,7 @@ host('gobie.titomiguelcosta.com')
     ->set('env', ['APP_ENV' => 'prod']);
 
 task('yarn:install', function () {
-    run('cd {{release_path}} && npm install --loglevel=error');
+    run('cd {{release_path}} && yarn install');
     run('cd {{release_path}} && yarn encore production');
 }, [
     'timeout' => 3600
