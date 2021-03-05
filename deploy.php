@@ -4,8 +4,8 @@ namespace Deployer;
 
 require 'recipe/symfony4.php';
 
-set('application', 'groomingchimps:web');
-set('repository', 'git@bitbucket.org:groomingchimps/web.git');
+set('application', 'gobie:web');
+set('repository', 'git@git@github.com:titomiguelcosta/gobie-website.git');
 set('git_tty', false);
 set('keep_releases', 2);
 set('shared_dirs', ['var/log', 'var/sessions', 'vendor']);
