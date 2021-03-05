@@ -5,7 +5,7 @@ namespace Deployer;
 require 'recipe/symfony4.php';
 
 set('application', 'gobie:web');
-set('repository', 'git@git@github.com:titomiguelcosta/gobie-website.git');
+set('repository', 'git@github.com:titomiguelcosta/gobie-website.git');
 set('git_tty', false);
 set('keep_releases', 2);
 set('shared_dirs', ['var/log', 'var/sessions', 'vendor']);
