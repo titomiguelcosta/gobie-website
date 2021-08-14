@@ -3,17 +3,17 @@
 namespace App\Factory;
 
 use App\Entity\Task;
+use App\Model\Churn;
 use App\Model\LintTwig;
 use App\Model\LintXliff;
 use App\Model\LintYaml;
+use App\Model\Phpcs;
 use App\Model\PhpInsights;
 use App\Model\Phploc;
 use App\Model\Phpmd;
 use App\Model\Phpstan;
 use App\Model\Psalm;
 use App\Model\SecurityCheck;
-use App\Model\Churn;
-use App\Model\Phpcs;
 use RuntimeException;
 
 class TaskFactory
