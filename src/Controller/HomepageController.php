@@ -26,10 +26,10 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $message = (new \Swift_Message('Grooming Chimps: Early Access Request'))
-                ->setFrom('groomingchimps@titomiguelcosta.com')
+            $message = (new \Swift_Message('Gobie: Early Access Request'))
+                ->setFrom('gobie@titomiguelcosta.com')
                 ->setTo($data['email'])
-                ->setBcc('groomingchimps@titomiguelcosta.com')
+                ->setBcc('gobie@titomiguelcosta.com')
                 ->setBody(
                     'Hello, thanks for your interest. We got your request. In the upcoming assembly, the chimps will decide if we are ready to welcome you. Bear with us.',
                     'text/plain'

@@ -2,7 +2,7 @@
 
 namespace App\Controller\Project;
 
-use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
+use App\Api\Gobie\Client as GobieApiClient;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class ListController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/projects", name="project_list")
      */
-    public function __invoke(Request $request, GroomingChimpsApiClient $client)
+    public function __invoke(Request $request, GobieApiClient $client)
     {
         $data = $client->getProjects($request->query->get('p', '1'));
 

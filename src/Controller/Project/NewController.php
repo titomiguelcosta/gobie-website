@@ -2,7 +2,7 @@
 
 namespace App\Controller\Project;
 
-use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
+use App\Api\Gobie\Client as GobieApiClient;
 use App\Entity\JobSubmit;
 use App\Factory\TaskFactory;
 use App\Form\JobSubmitType;
@@ -21,7 +21,7 @@ class NewController extends AbstractController
     public function __invoke(
         Request $request,
         Security $security,
-        GroomingChimpsApiClient $client,
+        GobieApiClient $client,
         TaskFactory $taskFactory
     ) {
         $jobSubmit = new JobSubmit();

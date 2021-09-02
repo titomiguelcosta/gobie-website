@@ -2,15 +2,15 @@
 
 namespace App\Command;
 
-use App\Api\GroomingChimps\Client;
+use App\Api\Gobie\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class GroomingChimpsApiClientCommand extends Command
+class GobieApiClientCommand extends Command
 {
-    protected static $defaultName = 'app:grooming-chimps:api:client';
+    protected static $defaultName = 'app:gobie:api:client';
 
     /** @var Client */
     private $client;
@@ -24,8 +24,7 @@ class GroomingChimpsApiClientCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Playground for the Grooming Chimps API')
-        ;
+            ->setDescription('Playground for the Gobie API');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

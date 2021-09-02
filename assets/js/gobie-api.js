@@ -1,7 +1,7 @@
 class GobieApi {
 
     constructor(baseUrl = null) {
-        this.baseUrl = baseUrl ? baseUrl : process.env.GROOMING_CHIMPS_API_BASE_URI;
+        this.baseUrl = baseUrl ? baseUrl : process.env.GOBIE_API_BASE_URI;
         this.errors = false;
         this.data = {};
     }

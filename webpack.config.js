@@ -74,7 +74,7 @@ Encore
             throw env.error;
         }
 
-        options['process.env'].GROOMING_CHIMPS_API_BASE_URI = JSON.stringify(env.parsed.GROOMING_CHIMPS_API_BASE_URI);
+        options['process.env'].GOBIE_API_BASE_URI = JSON.stringify(env.parsed.GOBIE_API_BASE_URI);
     })
     ;
 

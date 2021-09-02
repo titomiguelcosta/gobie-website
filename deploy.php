@@ -16,7 +16,7 @@ set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progre
 host('gobie.titomiguelcosta.com')
     ->user('ubuntu')
     ->stage('dev')
-    ->set('deploy_path', '/mnt/websites/groomingchimps/web')
+    ->set('deploy_path', '/mnt/websites/gobie/web')
     ->set('shared_files', ['.env.local'])
     ->set('http_user', 'ubuntu')
     ->set('writable_mode', 'acl')

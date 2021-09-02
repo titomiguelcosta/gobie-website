@@ -2,7 +2,7 @@
 
 namespace App\Controller\Job;
 
-use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
+use App\Api\Gobie\Client as GobieApiClient;
 use App\Factory\TaskFactory;
 use App\Graph\TaskAggregator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,7 +15,7 @@ class ViewController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/jobs/{id}", name="job_view")
      */
-    public function __invoke($id, GroomingChimpsApiClient $client, TaskFactory $factory)
+    public function __invoke($id, GobieApiClient $client, TaskFactory $factory)
     {
         $job = $client->getJob($id);
         $aggregator = new TaskAggregator($factory, $job['tasks']);

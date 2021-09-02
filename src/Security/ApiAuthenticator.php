@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Api\GroomingChimps\Client;
+use App\Api\Gobie\Client;
 use App\Entity\User;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\RedirectResponse;

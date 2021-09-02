@@ -2,7 +2,7 @@
 
 namespace App\Controller\Project;
 
-use App\Api\GroomingChimps\Client as GroomingChimpsApiClient;
+use App\Api\Gobie\Client as GobieApiClient;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ class DeleteController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/projects/{id}/delete", name="project_delete")
      */
-    public function __invoke($id, GroomingChimpsApiClient $client)
+    public function __invoke($id, GobieApiClient $client)
     {
         $deleted = $client->deleteProject($id);
 

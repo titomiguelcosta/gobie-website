@@ -1,9 +1,9 @@
 twig:
-    default_path: '%kernel.project_dir%/templates'
-    debug: '%kernel.debug%'
-    strict_variables: '%kernel.debug%'
-    form_themes: ['bootstrap_4_layout.html.twig']
-    globals:
-        grooming_chimps_api_base_url: '%env(GROOMING_CHIMPS_API_BASE_URI)%'
-        pusher_token: '%env(PUSHER_TOKEN)%'
-        pusher_cluster: '%env(PUSHER_CLUSTER)%'
+  default_path: "%kernel.project_dir%/templates"
+  debug: "%kernel.debug%"
+  strict_variables: "%kernel.debug%"
+  form_themes: ["bootstrap_4_layout.html.twig"]
+  globals:
+    gobie_api_base_url: "%env(GOBIE_API_BASE_URI)%"
+    pusher_token: "%env(PUSHER_TOKEN)%"
+    pusher_cluster: "%env(PUSHER_CLUSTER)%"

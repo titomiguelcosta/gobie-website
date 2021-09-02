@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\GroomingChimps;
+namespace App\Api\Gobie;
 
 use App\Entity\Task;
 use App\Entity\User;
