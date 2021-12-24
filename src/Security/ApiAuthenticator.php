@@ -63,7 +63,9 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     {
         $user = $this->getUser($this->getCredentials($request));
 
-        return new SelfValidatingPassport(new UserBadge($user->getUsername()));
+        $this->userProvider->setToken($user->getToken());
+
+        return new SelfValidatingPassport(new UserBadge($user->getUsername(), [$this->userProvider, 'loadUserByIdentifier']));
     }
 
     public function createToken(Passport $passport, string $firewallName): TokenInterface
@@ -73,16 +75,11 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $this->tokenStorage->setToken($token);
-
-        return null;
-        /*
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('project_list'));
-        */
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response

@@ -35,9 +35,8 @@ class JobSubmitType extends AbstractType
             ->add('branch', TextType::class)
             ->add('environment', ChoiceType::class, [
                 'choices' => [
+                    'PHP 8.1' => 'PHP81',
                     'PHP 8.0' => 'PHP80',
-                    'PHP 7.4' => 'PHP74',
-                    'PHP 7.3' => 'PHP73',
                 ],
             ])
             ->add('tasks', ChoiceType::class, [
