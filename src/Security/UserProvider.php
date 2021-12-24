@@ -13,16 +13,23 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface
 {
     private $client;
+    private $token;
 
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->token = null;
+    }
+
+    public function setToken(?string $token)
+    {
+        $this->token = $token;
     }
 
     public function loadUserByIdentifier(string $username): UserInterface
     {
         try {
-            $data = $this->client->getUser($username);
+            $data = $this->client->getUser($username, $this->token);
         } catch (ClientException $exception) {
             throw new UserNotFoundException();
         }

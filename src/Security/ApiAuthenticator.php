@@ -22,8 +22,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
 class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
@@ -63,10 +63,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     {
         $user = $this->getUser($this->getCredentials($request));
 
-        return new Passport(
-            new UserBadge($user->getUsername(), [$this->userProvider, 'loadUserByIdentifier']),
-            new PasswordCredentials($request->request->get('password'))
-        );
+        return new SelfValidatingPassport(new UserBadge($user->getUsername()));
     }
 
     public function createToken(Passport $passport, string $firewallName): TokenInterface
@@ -125,6 +122,8 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         } catch (ClientException $exception) {
             throw new CustomUserMessageAuthenticationException('Token invalid. Bad credentials.');
         }
+
+        $this->userProvider->setToken($data['token']);
 
         /** @var User $user */
         $user = new User();

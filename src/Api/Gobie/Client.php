@@ -21,14 +21,14 @@ class Client
         $this->security = $security;
     }
 
-    public function getUser(string $username): array
+    public function getUser(string $username, string $token = null): array
     {
         $response = $this->httpClient->request(
             Request::METHOD_GET,
             sprintf('/users/%s', $username),
             [
                 'headers' => $this->getHeaders(),
-                'auth_bearer' => $this->getAuthBearer(),
+                'auth_bearer' => $token ?? $this->getAuthBearer(),
             ]
         );
 
