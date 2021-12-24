@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 class NewController extends AbstractController
 {
@@ -20,7 +19,6 @@ class NewController extends AbstractController
      */
     public function __invoke(
         Request $request,
-        Security $security,
         GobieApiClient $client,
         TaskFactory $taskFactory
     ) {

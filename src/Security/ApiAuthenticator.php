@@ -18,36 +18,37 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
 class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
     use TargetPathTrait;
 
+    private $userProvider;
     private $urlGenerator;
     private $csrfTokenManager;
     private $client;
     private $encoder;
 
     public function __construct(
+        UserProvider $userProvider,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordHasherInterface $encoder,
         Client $client
     ) {
+        $this->userProvider = $userProvider;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->client = $client;
         $this->encoder = $encoder;
     }
 
-    /**
-     * @return bool
-     */
     public function supports(Request $request): ?bool
     {
         return 'app_login' === $request->attributes->get('_route')
@@ -58,7 +59,15 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     {
         $user = $this->getUser($this->getCredentials($request));
 
-        return new SelfValidatingPassport(new UserBadge($user->getUsername()));
+        return new Passport(
+            new UserBadge($user->getUsername(), [$this->userProvider, 'loadUserByIdentifier']),
+            new PasswordCredentials($request->request->get('password'))
+        );
+    }
+
+    public function createToken(Passport $passport, string $firewallName): TokenInterface
+    {
+        return new UsernamePasswordToken($passport->getUser(), $firewallName, $passport->getUser()->getRoles());
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
@@ -67,7 +76,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        return new RedirectResponse($this->urlGenerator->generate('project_list'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
