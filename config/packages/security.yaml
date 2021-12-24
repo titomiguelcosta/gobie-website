@@ -11,11 +11,11 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     main:
-      form_login: true
       custom_authenticators:
         - App\Security\ApiAuthenticator
       logout:
         path: app_logout
   access_control:
+    - { path: ^/login, roles: PUBLIC_ACCESS }
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
