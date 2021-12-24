@@ -10,6 +10,9 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     main:
+      stateless: false
+      provider: users
+      user_checker: ~
       custom_authenticators:
         - App\Security\ApiAuthenticator
       logout:
@@ -17,5 +20,3 @@ security:
   access_control:
     - { path: ^/, roles: PUBLIC_ACCESS }
     - { path: ^/login, roles: PUBLIC_ACCESS }
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }

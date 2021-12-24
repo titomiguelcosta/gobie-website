@@ -72,11 +72,14 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        return null;
+        /*
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('project_list'));
+        */
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
