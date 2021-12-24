@@ -13,8 +13,7 @@ security:
       stateless: false
       provider: users
       user_checker: ~
-      custom_authenticators:
-        - App\Security\ApiAuthenticator
+      custom_authenticator: App\Security\ApiAuthenticator
       logout:
         path: app_logout
   access_control:
