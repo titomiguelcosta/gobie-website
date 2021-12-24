@@ -41,6 +41,7 @@ class UserProvider implements UserProviderInterface
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
         $user->setRoles($data['roles']);
+        $user->setToken($this->token);
 
         return $user;
     }
