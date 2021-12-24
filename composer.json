@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.10",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.0",
+        "symfony/amazon-mailer": "^6.0",
         "symfony/asset": "^6.0",
         "symfony/console": "^6.0",
         "symfony/dotenv": "^6.0",
