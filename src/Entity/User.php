@@ -98,7 +98,7 @@ class User implements UserInterface
      *
      * @return string The username
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -143,5 +143,10 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         $this->password = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 }
