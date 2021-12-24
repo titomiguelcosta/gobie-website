@@ -18,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -34,19 +35,22 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     private $csrfTokenManager;
     private $client;
     private $encoder;
+    private $tokenStorage;
 
     public function __construct(
         UserProvider $userProvider,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordHasherInterface $encoder,
-        Client $client
+        Client $client,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->userProvider = $userProvider;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->client = $client;
         $this->encoder = $encoder;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function supports(Request $request): ?bool
@@ -72,6 +76,8 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $this->tokenStorage->setToken($token);
+
         return null;
         /*
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
@@ -92,10 +98,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return new RedirectResponse($this->getLoginUrl());
     }
 
-    /**
-     * @return array|mixed
-     */
-    private function getCredentials(Request $request)
+    private function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('username'),
@@ -110,7 +113,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return $credentials;
     }
 
-    private function getUser(array $credentials)
+    private function getUser(array $credentials): User
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -135,7 +138,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         return $user;
     }
 
-    protected function getLoginUrl()
+    private function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('app_login');
     }
