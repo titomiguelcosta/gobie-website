@@ -1,22 +1,21 @@
 security:
-    encoders:
-        App\Entity\User:
-            algorithm: bcrypt
-    providers:
-        users:
-            id: App\Security\UserProvider
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
-            form_login: true
-            guard:
-                authenticators:
-                    - App\Security\ApiAuthenticator
-            logout:
-                path: app_logout
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+  enable_authenticator_manager: true
+  password_hashers:
+    App\Entity\User:
+      algorithm: bcrypt
+  providers:
+    users:
+      id: App\Security\UserProvider
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      form_login: true
+      custom_authenticators:
+        - App\Security\ApiAuthenticator
+      logout:
+        path: app_logout
+  access_control:
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }
