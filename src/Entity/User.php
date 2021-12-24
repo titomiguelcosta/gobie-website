@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string The password
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
