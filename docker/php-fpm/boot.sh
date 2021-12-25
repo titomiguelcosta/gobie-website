@@ -1,3 +1,4 @@
 #!/bin/bash
 
-/usr/sbin/php-fpm7.4
+/usr/sbin/php-fpm8.0
+
