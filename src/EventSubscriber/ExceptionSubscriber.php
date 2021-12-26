@@ -19,7 +19,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     {
         $exception = $event->getThrowable();
 
-        if ($exception instanceof ClientException && Response::HTTP_UNAUTHORIZED === $$exception->getErrorCode()) {
+        if ($exception instanceof ClientException && Response::HTTP_UNAUTHORIZED === $exception->getResponse()->getStatusCode()) {
             $event->setResponse(new RedirectResponse($this->router->generate('app_logout', [], UrlGeneratorInterface::ABSOLUTE_URL)));
         }
     }
