@@ -18,7 +18,7 @@ host('gobie.titomiguelcosta.com')
     ->stage('dev')
     ->set('deploy_path', '/mnt/websites/gobie/web')
     ->set('shared_files', ['.env.local'])
-    ->set('http_user', 'ubuntu')
+    ->set('http_user', 'www-data')
     ->set('writable_mode', 'acl')
     ->set('branch', 'master')
     ->set('env', ['APP_ENV' => 'prod']);

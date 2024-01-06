@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/jobs/{id}", name="job_view")
+     * #[IsGranted("ROLE_USER")]
+     * #[Route("/jobs/{id}", name="job_view")]
      */
     public function __invoke($id, GobieApiClient $client, TaskFactory $factory)
     {

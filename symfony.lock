@@ -638,6 +638,9 @@
             "config/packages/twig_extensions.yaml"
         ]
     },
+    "twig/extra-bundle": {
+        "version": "v3.8.0"
+    },
     "twig/twig": {
         "version": "v2.7.4"
     },

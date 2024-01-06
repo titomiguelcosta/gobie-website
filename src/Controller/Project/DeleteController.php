@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/projects/{id}/delete", name="project_delete")
+     * #[IsGranted("ROLE_USER")]
+     * #[Route("/projects/{id}/delete", name="project_delete")]
      */
     public function __invoke($id, GobieApiClient $client)
     {

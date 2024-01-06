@@ -24,12 +24,15 @@ class GobieApiClientCommand extends Command
     protected function configure()
     {
         $this
+            ->setName(self::$defaultName)
             ->setDescription('Playground for the Gobie API');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $io->text($this->client->getJobs());
+
+        return Command::SUCCESS;
     }
 }

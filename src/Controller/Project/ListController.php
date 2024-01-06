@@ -11,8 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/projects", name="project_list")
+     * #[IsGranted("ROLE_USER")]
+     * #[Route("/projects", name="project_list")]
      */
     public function __invoke(Request $request, GobieApiClient $client)
     {

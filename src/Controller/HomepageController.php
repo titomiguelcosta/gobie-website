@@ -14,7 +14,7 @@ use Symfony\Component\Mime\Email;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * #[Route("/", name="homepage")]
      */
     public function __invoke(Request $request, Security $security, MailerInterface $mailer)
     {

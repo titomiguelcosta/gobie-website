@@ -56,10 +56,8 @@ class UserProvider implements UserProviderInterface
      *
      * If your firewall is "stateless: true" (for a pure API), this
      * method is not called.
-     *
-     * @return UserInterface
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
@@ -71,7 +69,7 @@ class UserProvider implements UserProviderInterface
     /**
      * Tells Symfony to use this provider for this User class.
      */
-    public function supportsClass(string $class)
+    public function supportsClass(string $class): bool
     {
         return User::class === $class;
     }
