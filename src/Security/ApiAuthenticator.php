@@ -24,6 +24,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
@@ -100,7 +101,7 @@ class ApiAuthenticator extends AbstractAuthenticator implements AuthenticationEn
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
-            Security::LAST_USERNAME,
+            SecurityRequestAttributes::LAST_USERNAME,
             $credentials['username']
         );
 
