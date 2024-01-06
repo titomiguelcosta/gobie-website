@@ -11,10 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RerunController extends AbstractController
 {
-    /**
-     * #[IsGranted("ROLE_USER")]
-     * #[Route("/jobs/{id}/rerun", name="job_rerun")]
-     */
+    #[IsGranted("ROLE_USER")]
+    #[Route("/jobs/{id}/rerun", name: "job_rerun")]
     public function __invoke($id, Request $request, GobieApiClient $client, TaskFactory $factory)
     {
         $job = $client->rerunJob($id, $request->query->get('token', ''));

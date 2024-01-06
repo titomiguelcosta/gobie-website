@@ -21,7 +21,11 @@ host('gobie.titomiguelcosta.com')
     ->set('http_user', 'www-data')
     ->set('writable_mode', 'acl')
     ->set('branch', 'master')
-    ->set('env', ['APP_ENV' => 'prod']);
+    ->set('env', [
+        'APP_ENV' => 'prod', 
+        'PATH' => '/usr/local/bin:/usr/bin:/bin:/mnt/websites/.ubuntu/.nvm/versions/node/v20.0.0/bin',
+        'NODE_OPTIONS' => '--openssl-legacy-provider',
+    ]);
 
 task('yarn:install', function () {
     run('cd {{release_path}} && yarn install');

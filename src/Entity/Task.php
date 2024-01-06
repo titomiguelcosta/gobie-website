@@ -6,9 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Task
 {
-    /**
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank()]
     private $tool;
     private $label;
 
