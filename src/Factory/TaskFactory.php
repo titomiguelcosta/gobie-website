@@ -14,7 +14,6 @@ use App\Model\Phpmd;
 use App\Model\Phpstan;
 use App\Model\Psalm;
 use App\Model\SecurityCheck;
-use RuntimeException;
 
 class TaskFactory
 {
@@ -66,7 +65,7 @@ class TaskFactory
     public function createTask(string $tool): Task
     {
         if (!array_key_exists($tool, $this->tasks)) {
-            throw new RuntimeException('No task definition');
+            throw new \RuntimeException('No task definition');
         }
 
         if (null === $this->tasks[$tool]) {

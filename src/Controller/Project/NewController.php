@@ -13,8 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NewController extends AbstractController
 {
-    #[IsGranted("ROLE_USER")]
-    #[Route("/projects/new", name: "project_new")]
+    #[IsGranted('ROLE_USER')]
+    #[Route('/projects/new', name: 'project_new')]
     public function __invoke(
         Request $request,
         GobieApiClient $client,

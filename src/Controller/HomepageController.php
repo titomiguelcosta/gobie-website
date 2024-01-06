@@ -5,15 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EarlyAccessType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
-    #[Route("/", name: "homepage")]
+    #[Route('/', name: 'homepage')]
     public function __invoke(Request $request, Security $security, MailerInterface $mailer)
     {
         if ($security->getUser() instanceof User) {

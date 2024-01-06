@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,35 +10,35 @@ class JobSubmit
 {
     #[ORM\Id()]
     #[ORM\GeneratedValue()]
-    #[ORM\Column(type: "integer")]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
 
-    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     #[Assert\NotBlank()]
     private $environment;
 
-     #[ORM\Column(type: "string", length: 255)]
-     #[Assert\NotBlank()]
-     #[Assert\Url(protocols: ["https"], message: "Only the https protocol is accepted.")]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Url(protocols: ['https'], message: 'Only the https protocol is accepted.')]
     private $repo;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank()]
     private $branch;
 
-    #[ORM\Column(type: "json")]
-    #[Assert\Count(min: 1, minMessage: "Pick at least one task")]
+    #[ORM\Column(type: 'json')]
+    #[Assert\Count(min: 1, minMessage: 'Pick at least one task')]
     private $tasks;
 
-    #[ORM\Column(type: "datetime")]
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
     public function __construct()
     {
-        $this->setCreatedAt(new DateTimeImmutable());
+        $this->setCreatedAt(new \DateTimeImmutable());
     }
 
     public function getId(): ?int
