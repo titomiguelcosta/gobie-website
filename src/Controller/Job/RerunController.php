@@ -3,7 +3,6 @@
 namespace App\Controller\Job;
 
 use App\Api\Gobie\Client as GobieApiClient;
-use App\Factory\TaskFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +12,7 @@ class RerunController extends AbstractController
 {
     #[IsGranted("ROLE_USER")]
     #[Route("/jobs/{id}/rerun", name: "job_rerun")]
-    public function __invoke($id, Request $request, GobieApiClient $client, TaskFactory $factory)
+    public function __invoke($id, Request $request, GobieApiClient $client)
     {
         $job = $client->rerunJob($id, $request->query->get('token', ''));
 
