@@ -4,6 +4,8 @@ namespace App\Api\Gobie;
 
 use App\Entity\Task;
 use App\Entity\User;
+use AsyncAws\Core\Exception\Http\ServerException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +14,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Client
 {
-    private $httpClient;
-    private $security;
-
-    public function __construct(HttpClientInterface $httpClient, Security $security)
+    public function __construct(private HttpClientInterface $httpClient, private Security $security, private LoggerInterface $logger)
     {
-        $this->httpClient = $httpClient;
-        $this->security = $security;
     }
 
     public function getUser(string $username, string $token = null): array
@@ -156,7 +153,13 @@ class Client
             ]
         );
 
-        return $response->toArray();
+        try {
+            return $response->toArray();
+        } catch (ServerException $e) {
+            $this->logger->error('Failed to created job', ['message' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+
+            throw $e;
+        }
     }
 
     public function rerunJob(string $jobId, string $jobToken): array
