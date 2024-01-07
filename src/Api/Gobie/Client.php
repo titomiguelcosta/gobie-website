@@ -4,13 +4,13 @@ namespace App\Api\Gobie;
 
 use App\Entity\Task;
 use App\Entity\User;
-use AsyncAws\Core\Exception\Http\ServerException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Throwable;
 
 class Client
 {
@@ -155,7 +155,7 @@ class Client
 
         try {
             return $response->toArray();
-        } catch (ServerException $e) {
+        } catch (Throwable $e) {
             $this->logger->error('Failed to created job', ['message' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
 
             throw $e;
