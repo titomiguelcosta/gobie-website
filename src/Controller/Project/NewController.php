@@ -6,7 +6,7 @@ use App\Api\Gobie\Client as GobieApiClient;
 use App\Entity\JobSubmit;
 use App\Factory\TaskFactory;
 use App\Form\JobSubmitType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
